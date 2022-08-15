@@ -1,17 +1,26 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {HomeScreen} from '../../screens/main/Home';
+
 import {View, Text, SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Button} from 'react-native';
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const Home = () => {
+  return (
+    <View>
+      <Text>Home Component</Text>
+    </View>
+  );
+};
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="home"
+          component={Home}
           options={{title: 'Home', headerTitleAlign: 'center'}}
         />
       </Stack.Navigator>
