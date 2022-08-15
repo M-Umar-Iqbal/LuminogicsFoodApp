@@ -10,11 +10,7 @@ import {
   View,
 } from 'react-native';
 const App = () => {
-  return (
-    <View>
-      <Navigation />
-    </View>
-  );
+  return <Navigation />;
 };
 
 export default App;
