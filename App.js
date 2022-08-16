@@ -1,5 +1,7 @@
 import React from 'react';
 import Navigation from './src/navigation/main';
+import {NavigationContainer} from '@react-navigation/native';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -10,7 +12,11 @@ import {
   View,
 } from 'react-native';
 const App = () => {
-  return <Navigation />;
+  return (
+    <NavigationContainer>
+      <Navigation />
+    </NavigationContainer>
+  );
 };
 
 export default App;
