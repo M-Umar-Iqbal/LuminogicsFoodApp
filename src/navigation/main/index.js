@@ -1,17 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {View, Text, SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from '../../components/Home';
-import {Button} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+// import HomeScreen from 'D:/nativeApp/src/components/Home';
+import HomeScreen from '../../components/Home';
+import Dashboard from '../../components/Dashboard';
+
+import {Button} from 'react-native';
 const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home Component</Text>
       <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-        <Text style={styles.title}>Go To Profile Screen</Text>
+        <View style={styles.customButtonContainer}>
+          <Text style={styles.customButtonTitle}>Login</Text>
+        </View>
       </TouchableOpacity>
       <View style={{width: '50%'}}>
         <Button
@@ -65,9 +71,25 @@ export default function StackNavigation() {
         name="ProfileScreen"
         component={HomeScreen}
         options={{
-          title: 'Profile',
+          title: 'Admin Login',
+          headerTitleAlign: 'center',
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Dash_board"
+        component={Dashboard}
+        options={{
+          title: 'Dashboard',
           headerTitleAlign: 'center',
           headerShown: true,
+          headerBackVisible: false,
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert('Logout')}>
+              <MaterialIcons name={'logout'} size={30} color={'black'} />
+            </TouchableOpacity>
+          ),
         }}
       />
     </Stack.Navigator>
@@ -85,6 +107,16 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '10%',
-    backgroundColor: 'red',
+  },
+  customButtonContainer: {
+    backgroundColor: 'green',
+    padding: 10,
+    width: 170,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  customButtonTitle: {
+    color: 'white',
+    fontWeight: '400',
   },
 });
