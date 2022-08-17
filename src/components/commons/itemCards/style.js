@@ -5,7 +5,7 @@ const getStyles = () =>
       color: 'black',
       fontSize: 15,
       fontWeight: '500',
-      marginTop: 10,
+      padding: 10,
     },
     container: {
       margin: 10,
@@ -15,7 +15,7 @@ const getStyles = () =>
       alignItems: 'center',
       borderRadius: 20,
       backgroundColor: '#ffffff',
-      elevation: 20,
+      elevation: 10,
     },
   });
 export default getStyles;

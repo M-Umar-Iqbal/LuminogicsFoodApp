@@ -19,7 +19,6 @@ export default function Home({navigation}) {
   const styles = getStyles();
   const [emailErrorColor, setEmailErrorColor] = useState('#45C5F0');
   const [passwordErrorColor, setPasswordErrorColor] = useState('#45C5F0');
-
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState(null);
 
@@ -62,7 +61,7 @@ export default function Home({navigation}) {
       setLoader(true);
       setTimeout(() => {
         navigation.navigate('Dash_board');
-      }, 2000);
+      }, 500);
     } else {
       Keyboard.dismiss();
     }

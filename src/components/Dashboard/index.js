@@ -25,10 +25,10 @@ export default function Dashboard({navigation}) {
         onPress={() => navigation.navigate('MorningTea')}
       />
       <Card
-        Title="Launch"
+        Title="Lunch"
         img="hamburger"
         color="#D36B00"
-        onPress={() => console.log('Launch')}
+        onPress={() => navigation.navigate('Lunch')}
       />
       <Card
         Title="Evening Tea"
@@ -36,8 +36,6 @@ export default function Dashboard({navigation}) {
         color="#FEC260"
         onPress={() => navigation.navigate('EveningTea')}
       />
-
-      {/* <Card /> */}
     </View>
   );
 }

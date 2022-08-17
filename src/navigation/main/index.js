@@ -10,6 +10,7 @@ import HomeScreen from '../../components/Login';
 import Dashboard from '../../components/Dashboard';
 import EveningTea from '../../components/eveningTeaGenerateReport';
 import MorningTea from '../../components/morningTeaGenerateReport';
+import Lunch from '../../components/Lunch';
 
 const Stack = createNativeStackNavigator();
 export default function StackNavigation() {
@@ -64,7 +65,7 @@ export default function StackNavigation() {
 
           title: 'Evening Tea',
           headerTitleAlign: 'center',
-          headerShown: true,
+          headerShown: false,
           // headerBackVisible: false,
         }}
       />
@@ -77,7 +78,22 @@ export default function StackNavigation() {
           // },
           title: 'Morning Tea',
           headerTitleAlign: 'center',
-          headerShown: true,
+          headerShown: false,
+          // headerBackVisible: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Lunch"
+        component={Lunch}
+        options={{
+          // headerStyle: {
+          //   backgroundColor: '#45C5F0',
+          // },
+
+          title: 'Launch',
+          headerTitleAlign: 'center',
+          headerShown: false,
           // headerBackVisible: false,
         }}
       />
