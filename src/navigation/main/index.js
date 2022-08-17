@@ -6,64 +6,22 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 // import HomeScreen from 'D:/nativeApp/src/components/Home';
-import HomeScreen from '../../components/Home';
+import HomeScreen from '../../components/Login';
 import Dashboard from '../../components/Dashboard';
+import EveningTea from '../../components/eveningTeaGenerateReport';
+import MorningTea from '../../components/morningTeaGenerateReport';
 
-import {Button} from 'react-native';
-const Home = ({navigation}) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home Component</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
-        <View style={styles.customButtonContainer}>
-          <Text style={styles.customButtonTitle}>Login</Text>
-        </View>
-      </TouchableOpacity>
-      <View style={{width: '50%'}}>
-        <Button
-          title="Go to Options"
-          onPress={() => navigation.navigate('options')}
-        />
-      </View>
-    </View>
-  );
-};
-
-const Options = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Options Component</Text>
-    </View>
-  );
-};
-
-const Tab = createBottomTabNavigator();
-export function TabNavigation() {
-  return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen
-        name="home"
-        component={Home}
-        options={{title: 'Home', headerTitleAlign: 'center'}}
-      />
-      <Tab.Screen
-        name="options"
-        component={Options}
-        options={{title: 'Options', headerTitleAlign: 'center'}}
-      />
-    </Tab.Navigator>
-  );
-}
 const Stack = createNativeStackNavigator();
 export default function StackNavigation() {
   return (
     <Stack.Navigator
+      initialRouteName="Login"
       screenOptions={{
         headerShown: false,
       }}>
       <Stack.Screen
-        name="Tabs"
-        component={TabNavigation}
+        name="Login"
+        component={HomeScreen}
         options={{title: 'Home', headerTitleAlign: 'center'}}
       />
 
@@ -81,6 +39,10 @@ export default function StackNavigation() {
         name="Dash_board"
         component={Dashboard}
         options={{
+          // headerStyle: {
+          //   backgroundColor: '#45C5F0',
+          // },
+
           title: 'Dashboard',
           headerTitleAlign: 'center',
           headerShown: true,
@@ -90,6 +52,33 @@ export default function StackNavigation() {
               <MaterialIcons name={'logout'} size={30} color={'black'} />
             </TouchableOpacity>
           ),
+        }}
+      />
+      <Stack.Screen
+        name="EveningTea"
+        component={EveningTea}
+        options={{
+          // headerStyle: {
+          //   backgroundColor: '#45C5F0',
+          // },
+
+          title: 'Evening Tea',
+          headerTitleAlign: 'center',
+          headerShown: true,
+          // headerBackVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="MorningTea"
+        component={MorningTea}
+        options={{
+          // headerStyle: {
+          //   backgroundColor: '#45C5F0',
+          // },
+          title: 'Morning Tea',
+          headerTitleAlign: 'center',
+          headerShown: true,
+          // headerBackVisible: false,
         }}
       />
     </Stack.Navigator>

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-const styles = colors =>
+const styles = () =>
   StyleSheet.create({
     title: {
       color: 'black',
@@ -18,13 +18,11 @@ const styles = colors =>
       justifyContent: 'center',
       alignItems: 'center',
 
-      //   backgroundColor: '#3873A6',
       padding: 10,
       paddingBottom: 20,
       paddingTop: 20,
     },
     cardContainer: {
-      //   backgroundColor: 'red',
       margin: 30,
     },
     TextInputContainer: {
@@ -37,11 +35,26 @@ const styles = colors =>
       fontWeight: '500',
       fontSize: 20,
     },
+    largeTitle: {
+      color: 'black',
+      fontSize: 40,
+      fontWeight: '700',
+    },
+    smallTitle: {
+      color: 'grey',
+      fontSize: 15,
+      fontWeight: '500',
+    },
+    HeadingContainer: {
+      // backgroundColor: 'red',
+      paddingTop: 40,
+      paddingLeft: 20,
+    },
     customButtonContainer: {
-      marginTop: 15,
-      backgroundColor: '#000000',
+      marginTop: 5,
+      backgroundColor: '#45C5F0',
       padding: 15,
-      width: '70%',
+      width: '95%',
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
@@ -50,6 +63,13 @@ const styles = colors =>
       color: 'white',
       fontWeight: '700',
       textTransform: 'uppercase',
+    },
+    gap: {
+      marginTop: 5,
+      marginBottom: 5,
+    },
+    error: {
+      color: 'red',
     },
   });
 export default styles;
