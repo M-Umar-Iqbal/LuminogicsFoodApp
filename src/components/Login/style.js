@@ -7,7 +7,7 @@ const styles = () =>
     },
     mainContainer: {
       flex: 1,
-      justifyContent: 'center',
+
       alignItems: 'center',
     },
     container: {
@@ -15,15 +15,15 @@ const styles = () =>
       alignItems: 'center',
     },
     cardText: {
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       alignItems: 'center',
-
+      marginTop: 30,
       padding: 10,
       paddingBottom: 20,
       paddingTop: 20,
     },
     cardContainer: {
-      margin: 30,
+      margin: 20,
     },
     TextInputContainer: {
       paddingTop: 10,
@@ -46,18 +46,18 @@ const styles = () =>
       fontWeight: '500',
     },
     HeadingContainer: {
-      // backgroundColor: 'red',
       paddingTop: 40,
       paddingLeft: 20,
     },
     customButtonContainer: {
-      marginTop: 5,
-      backgroundColor: '#45C5F0',
-      padding: 15,
+      marginTop: 20,
+      backgroundColor: '#E68653',
+      padding: 22,
       width: '95%',
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
+      elevation: 20,
     },
     customButtonTitle: {
       color: 'white',
@@ -65,7 +65,7 @@ const styles = () =>
       textTransform: 'uppercase',
     },
     gap: {
-      marginTop: 5,
+      marginTop: 10,
       marginBottom: 5,
     },
     error: {

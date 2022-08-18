@@ -2,8 +2,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import getStyles from './style';
 import CheckBox from '@react-native-community/checkbox';
-import {Center} from 'native-base';
-export default function LunchCard() {
+
+export default function LunchCard({
+  Name = 'unKnown User',
+  paidAmount = 0,
+  totalRoti = 0,
+  description = 'NULL',
+}) {
   const styles = getStyles();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [disable, setDisable] = useState(toggleCheckBox);
@@ -21,7 +26,7 @@ export default function LunchCard() {
         ]}>
         <Text
           style={[styles.title, {textTransform: 'uppercase', color: complete}]}>
-          Umar Iqbal
+          {Name}
         </Text>
         <CheckBox
           disabled={disable}
@@ -41,7 +46,7 @@ export default function LunchCard() {
             alignItems: 'center',
           }}>
           <Text style={styles.title}>Paid Amount:</Text>
-          <Text> 500 Rupee</Text>
+          <Text> {paidAmount} Rupee</Text>
         </View>
 
         <View
@@ -50,7 +55,7 @@ export default function LunchCard() {
             alignItems: 'center',
           }}>
           <Text style={styles.title}>Roti: </Text>
-          <Text> 5 </Text>
+          <Text> {totalRoti} </Text>
         </View>
         <Text
           style={[
@@ -62,8 +67,7 @@ export default function LunchCard() {
               paddingTop: 10,
             },
           ]}>
-          Description: Khamiri Roti or 1 liter wali bottle abcd Description:
-          Khamiri Roti or 1 liter wali bottle abcdDescription: Khamiri Roti or 1
+          Description: {description}
         </Text>
       </View>
     </View>

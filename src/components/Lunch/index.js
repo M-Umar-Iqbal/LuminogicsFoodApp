@@ -3,7 +3,7 @@ import React from 'react';
 import getStyles from './style';
 import LunchCard from '../commons/lunchCard';
 import {useBackHandler} from '@react-native-community/hooks';
-
+import OrderDetail from '../commons/orderDetail';
 export default function Lunch({navigation: {goBack}}) {
   const styles = getStyles();
   function confirmExit() {
@@ -34,37 +34,23 @@ export default function Lunch({navigation: {goBack}}) {
   const {day, date} = Date;
   return (
     <View flex={1}>
-      <View style={styles.container} flex={2.5}>
-        <View style={styles.detailContainer}>
-          <View style={{alignItems: 'center', padding: 10}}>
-            <Text style={styles.mainHeading}>Lunch Orders</Text>
-          </View>
-          <View style={{padding: 2, alignItems: 'center'}}>
-            <Text style={styles.subHeading}>
-              {day}, {date}
-            </Text>
-          </View>
-          <View
-            style={{
-              marginTop: 20,
-              padding: 10,
-              backgroundColor: 'white',
-              alignItems: 'center',
-              borderColor: 'black',
-              borderWidth: 1,
-              borderRadius: 10,
-              elevation: 10,
-            }}>
-            <Text style={[styles.subHeading, {color: '#E68653'}]}>
-              Total bread's: 22
-            </Text>
-          </View>
-        </View>
-      </View>
+      <OrderDetail
+        title="Launch Requirements"
+        day="Monday"
+        date="28-02-2022"
+        item="Roti"
+        total={20}
+      />
       <View flex={7.5}>
         <ScrollView>
-          <LunchCard />
-          <LunchCard />
+          <LunchCard
+            Name="Umar"
+            paidAmount="500"
+            totalRoti="3"
+            description="Khamiri Roti or 1 liter wali bottle abcd Description:
+            Khamiri Roti or 1 liter wali bottle abcdDescription: Khamiri Roti or 1"
+          />
+          <LunchCard Name="Usman" paidAmount="500" totalRoti="3" />
           <LunchCard />
           <LunchCard />
           <LunchCard />

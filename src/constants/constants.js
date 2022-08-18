@@ -1,1 +1,1 @@
-export default URL = 'https://lu-meal-stage.herokuapp.com/api/admin';
+export default URL = 'https://lu-meal-stage.herokuapp.com';

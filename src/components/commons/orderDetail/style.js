@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 const getStyles = () =>
   StyleSheet.create({
-    container: {
-      backgroundColor: 'white',
-      flex: 1,
+    title: {
+      color: 'black',
     },
+
     detailContainer: {
       backgroundColor: '#E68653',
       padding: 10,
@@ -15,6 +15,7 @@ const getStyles = () =>
       color: 'black',
     },
     mainHeading: {
+      color: 'white',
       fontSize: 20,
       fontWeight: '800',
       padding: 10,
@@ -23,10 +24,10 @@ const getStyles = () =>
       borderRadius: 10,
     },
     subHeading: {
+      color: 'white',
+
       fontSize: 18,
       fontWeight: '500',
     },
-    header: {color: 'black', fontWeight: '600', fontSize: 17},
-    listTitle: {color: 'black', fontWeight: '400', fontSize: 15},
   });
 export default getStyles;

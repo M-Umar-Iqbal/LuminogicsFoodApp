@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../commons/itemCards';
 import getStyles from './style';
 import {useBackHandler} from '@react-native-community/hooks';
-import confirmExit from '../commons/confirmExit';
+
 export default function Dashboard({navigation}) {
   const styles = getStyles();
   // BackHandler.exitApp()
