@@ -88,6 +88,7 @@ const TeaGenerateReport = ({navigation: {goBack}}) => {
     },
   ];
   const {day, date} = Date;
+
   return (
     <View style={styles.container}>
       <View style={styles.detailContainer}>

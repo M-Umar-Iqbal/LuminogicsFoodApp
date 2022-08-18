@@ -12,7 +12,7 @@ import React, {useState} from 'react';
 
 import getStyles from './style';
 import {Stack, TextInput, IconButton} from '@react-native-material/core';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default function Home({navigation}) {
@@ -27,23 +27,23 @@ export default function Home({navigation}) {
 
   const [loader, setLoader] = useState(false);
 
-  let regex_email = new RegExp('[a-zA-Z0-9]+[._a-zA-Z0-9]+@luminogics+.com');
-  let regex_password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/;
+  let regex_email = 'faisal@luminogics.com';
+  let regex_password = 'faisal122';
 
   function emailCheck() {
-    if (regex_email.test(email)) {
+    if (regex_email === email.toLowerCase()) {
       setEmailError('');
       setEmailErrorColor('#45C5F0');
       return true;
     } else {
       setEmailErrorColor('red');
-      setEmailError('Please Enter a valid Email');
+      setEmailError('Invalid Admin Email');
       return false;
     }
   }
 
   function passwordCheck() {
-    if (regex_password.test(password)) {
+    if (regex_password === password) {
       setPasswordError('');
       setPasswordErrorColor('#45C5F0');
       return true;
