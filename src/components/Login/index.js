@@ -9,14 +9,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
+import {colors} from '../../constants/constants';
 
 import getStyles from './style';
 import MaterialIcons from 'react-native-vector-icons/Ionicons';
 import InputField from '../commons/inputField';
 export default function Home({navigation}) {
   const styles = getStyles();
-  const [emailErrorColor, setEmailErrorColor] = useState('#E68653');
-  const [passwordErrorColor, setPasswordErrorColor] = useState('#E68653');
+  const [emailErrorColor, setEmailErrorColor] = useState(colors.main);
+  const [passwordErrorColor, setPasswordErrorColor] = useState(colors.main);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState(null);
 
@@ -31,7 +32,7 @@ export default function Home({navigation}) {
   function emailCheck() {
     if (regex_email === email.toLowerCase()) {
       setEmailError('');
-      setEmailErrorColor('#E68653');
+      setEmailErrorColor(colors.main);
       return true;
     } else {
       setEmailErrorColor('red');
@@ -43,7 +44,7 @@ export default function Home({navigation}) {
   function passwordCheck() {
     if (regex_password === password) {
       setPasswordError('');
-      setPasswordErrorColor('#E68653');
+      setPasswordErrorColor(colors.main);
       return true;
     } else {
       setPasswordErrorColor('red');
@@ -72,7 +73,7 @@ export default function Home({navigation}) {
         <MaterialIcons
           name={'fast-food-outline'}
           size={150}
-          color={'#E68653'}
+          color={colors.main}
         />
       </View>
       <View style={styles.mainContainer}>

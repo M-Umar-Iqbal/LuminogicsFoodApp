@@ -1,14 +1,12 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../constants/constants';
+
 const getStyles = () =>
   StyleSheet.create({
-    title: {
-      color: 'black',
-    },
     container: {
-      backgroundColor: '#E68653',
       paddingTop: 20,
       flex: 1,
-      justifyContent: 'space-between',
+      justifyContent: 'space-evenly',
       flexDirection: 'row',
       flexWrap: 'wrap',
       // backgroundColor: 'grey',

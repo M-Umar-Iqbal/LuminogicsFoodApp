@@ -1,18 +1,14 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../../constants/constants';
+
 const getStyles = () =>
   StyleSheet.create({
     title: {
       color: 'black',
     },
 
-    detailContainer: {
-      backgroundColor: '#E68653',
-      padding: 10,
-      paddingTop: 20,
-      paddingBottom: 20,
-    },
     title: {
-      color: 'black',
+      color: colors.black,
     },
     mainHeading: {
       color: 'white',
@@ -24,10 +20,10 @@ const getStyles = () =>
       borderRadius: 10,
     },
     subHeading: {
-      color: 'white',
-
-      fontSize: 18,
+      color: 'black',
+      fontSize: 20,
       fontWeight: '500',
+      fontFamily: 'roboto',
     },
   });
 export default getStyles;

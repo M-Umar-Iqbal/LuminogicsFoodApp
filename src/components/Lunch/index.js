@@ -1,10 +1,17 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import getStyles from './style';
 import LunchCard from '../commons/lunchCard';
 import {useBackHandler} from '@react-native-community/hooks';
-import OrderDetail from '../commons/orderDetail';
+import OrderDetail from '../commons/orderDetails';
+import URL, {colors} from '../../constants/constants';
+import axios from 'axios';
+import LoadingIndicator from '../commons/loadingIndicator';
 export default function Lunch({navigation: {goBack}}) {
+  const [Data, setData] = useState([]);
+  const [totalRoti, setTotalRoti] = useState(0);
+  const [date, setDate] = useState('');
+
   const styles = getStyles();
   function confirmExit() {
     goBack();
@@ -12,50 +19,46 @@ export default function Lunch({navigation: {goBack}}) {
   }
   useBackHandler(confirmExit);
 
-  const Date = {
-    day: 'Monday',
-    date: '29-03-2022',
-  };
+  useEffect(() => {
+    getAll();
+  }, []);
 
-  const Data = [
-    {
-      name: 'Umar Iqbal',
-      roti: '0',
-      paid: '100',
-      description: 'Hello i am umar',
-    },
-    {
-      name: 'Usman',
-      roti: '5',
-      paid: '200',
-      description: 'Hello i am usman',
-    },
-  ];
-  const {day, date} = Date;
+  async function getAll() {
+    let res = await axios.get(`${URL}/api/admin/get-available-orders/Lunch`);
+    // console.log(res?.data?.payload?.data?.TotalRoti);
+
+    setTotalRoti(res?.data?.payload?.data?.TotalRoti);
+    setData(res?.data?.payload?.data?.orders);
+    setDate(res?.data?.payload?.data?.orders[0].orderDate);
+  }
+
   return (
-    <View flex={1}>
+    <View flex={1} style={styles.container}>
       <OrderDetail
         title="Launch Requirements"
-        day="Monday"
-        date="28-02-2022"
+        date={date}
         item="Roti"
-        total={20}
+        total={totalRoti}
       />
-      <View flex={7.5}>
-        <ScrollView>
-          <LunchCard
-            Name="Umar"
-            paidAmount="500"
-            totalRoti="3"
-            description="Khamiri Roti or 1 liter wali bottle abcd Description:
-            Khamiri Roti or 1 liter wali bottle abcdDescription: Khamiri Roti or 1"
-          />
-          <LunchCard Name="Usman" paidAmount="500" totalRoti="3" />
-          <LunchCard />
-          <LunchCard />
-          <LunchCard />
-        </ScrollView>
-      </View>
+      {Data.length !== 0 ? (
+        <View flex={7.5}>
+          <ScrollView>
+            {Data.map((e, index) => (
+              <LunchCard
+                key={index}
+                Name={e.employeeName}
+                paidAmount={e.amount}
+                totalRoti={e.rotiQuantity}
+                description={e.extras}
+              />
+            ))}
+          </ScrollView>
+        </View>
+      ) : (
+        <View flex={7.5}>
+          <LoadingIndicator />
+        </View>
+      )}
     </View>
   );
 }

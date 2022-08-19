@@ -2,16 +2,20 @@ import React, {useEffect, useState} from 'react';
 import {Text, View, Alert, ScrollView, Button} from 'react-native';
 import getStyles from './style';
 import {useBackHandler} from '@react-native-community/hooks';
-import OrderDetail from '../commons/orderDetail';
+import OrderDetail from '../commons/orderDetails';
 import FlatDataList from '../commons/flatList';
+import LoadingIndicator from '../commons/loadingIndicator';
 
 import URL from '../../constants/constants';
 import axios from 'axios';
 const TeaGenerateReport = ({navigation: {goBack}}) => {
   const styles = getStyles();
   const [totalCup, setTotalCup] = useState(0);
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState('');
   const [Data, setData] = useState([]);
+  const [halfCup, setHalfCup] = useState(0);
+  const [fullCup, setFullCup] = useState(0);
+
   function confirmExit() {
     goBack();
     return true;
@@ -26,9 +30,11 @@ const TeaGenerateReport = ({navigation: {goBack}}) => {
     let res = await axios.get(
       `${URL}/api/admin/get-available-orders/Morning-Tea`,
     );
-    setTotalCup(res?.data?.payload?.data?.total);
+    setTotalCup(res?.data?.payload?.data?.TotalCups);
     setDate(res?.data?.payload?.data?.orders[0].orderDate);
     setData(res?.data?.payload?.data?.orders);
+    setHalfCup(res?.data?.payload?.data?.HalfCups);
+    setFullCup(res?.data?.payload?.data?.FullCups);
   }
 
   return (
@@ -38,26 +44,15 @@ const TeaGenerateReport = ({navigation: {goBack}}) => {
         date={date}
         item="Cups"
         total={totalCup}
+        fullCups={fullCup}
+        halfCups={halfCup}
       />
       <View flex={7.5}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-
-            padding: 15,
-          }}>
-          <View style={{width: '50%'}}>
-            <Text style={styles.header}>Name</Text>
-          </View>
-          <View style={{width: '35%', alignItems: 'center'}}>
-            <Text style={styles.header}>Quantity</Text>
-          </View>
-          <View style={{width: '15%', alignItems: 'center'}}>
-            <Text style={styles.header}>Sugar</Text>
-          </View>
-        </View>
-        <FlatDataList Data={Data} />
+        {Data.length !== 0 ? (
+          <FlatDataList Data={Data} />
+        ) : (
+          <LoadingIndicator />
+        )}
       </View>
     </View>
   );

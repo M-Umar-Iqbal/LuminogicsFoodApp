@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../constants/constants';
 const styles = () =>
   StyleSheet.create({
     title: {
@@ -51,7 +52,7 @@ const styles = () =>
     },
     customButtonContainer: {
       marginTop: 20,
-      backgroundColor: '#E68653',
+      backgroundColor: colors.main,
       padding: 22,
       width: '95%',
       justifyContent: 'center',

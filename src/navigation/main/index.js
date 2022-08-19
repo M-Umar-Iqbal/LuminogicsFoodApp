@@ -11,12 +11,13 @@ import Dashboard from '../../components/Dashboard';
 import EveningTea from '../../components/eveningTeaGenerateReport';
 import MorningTea from '../../components/morningTeaGenerateReport';
 import Lunch from '../../components/Lunch';
+import {colors} from '../../constants/constants';
 
 const Stack = createNativeStackNavigator();
-export default function StackNavigation() {
+export default function StackNavigation({navigation}) {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Dash_board"
       screenOptions={{
         headerShown: false,
       }}>
@@ -50,7 +51,7 @@ export default function StackNavigation() {
           headerBackVisible: false,
           headerRight: () => (
             <TouchableOpacity onPress={() => alert('Logout')}>
-              <MaterialIcons name={'logout'} size={30} color={'black'} />
+              <MaterialIcons name={'logout'} size={30} color={colors.main} />
             </TouchableOpacity>
           ),
         }}
@@ -59,13 +60,13 @@ export default function StackNavigation() {
         name="EveningTea"
         component={EveningTea}
         options={{
-          // headerStyle: {
-          //   backgroundColor: '#45C5F0',
-          // },
+          headerStyle: {
+            backgroundColor: colors.main,
+          },
 
           title: 'Evening Tea',
           headerTitleAlign: 'center',
-          headerShown: false,
+          headerShown: true,
           // headerBackVisible: false,
         }}
       />
@@ -73,12 +74,12 @@ export default function StackNavigation() {
         name="MorningTea"
         component={MorningTea}
         options={{
-          // headerStyle: {
-          //   backgroundColor: '#45C5F0',
-          // },
+          headerStyle: {
+            backgroundColor: colors.main,
+          },
           title: 'Morning Tea',
           headerTitleAlign: 'center',
-          headerShown: false,
+          headerShown: true,
           // headerBackVisible: false,
         }}
       />
@@ -87,13 +88,12 @@ export default function StackNavigation() {
         name="Lunch"
         component={Lunch}
         options={{
-          // headerStyle: {
-          //   backgroundColor: '#45C5F0',
-          // },
-
+          headerStyle: {
+            backgroundColor: colors.main,
+          },
           title: 'Launch',
           headerTitleAlign: 'center',
-          headerShown: false,
+          headerShown: true,
           // headerBackVisible: false,
         }}
       />

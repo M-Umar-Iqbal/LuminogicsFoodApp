@@ -1,13 +1,15 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../../constants/constants';
+
 const getStyles = () =>
   StyleSheet.create({
     title: {
-      color: 'white',
+      color: colors.black,
       fontWeight: '700',
       fontSize: 15,
     },
     description: {
-      color: 'white',
+      color: colors.black,
     },
     container: {
       marginTop: 15,
@@ -18,15 +20,17 @@ const getStyles = () =>
       borderTopRightRadius: 20,
       borderBottomRightRadius: 20,
       overflow: 'hidden',
-      // elevation: 10,
     },
     header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       padding: 20,
-      backgroundColor: '#E68653',
+      backgroundColor: colors.main,
     },
     details: {
       padding: 20,
-      backgroundColor: 'grey',
+      backgroundColor: colors.lightGrey,
     },
   });
 export default getStyles;

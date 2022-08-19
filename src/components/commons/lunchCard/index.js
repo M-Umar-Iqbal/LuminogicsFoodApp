@@ -2,12 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import getStyles from './style';
 import CheckBox from '@react-native-community/checkbox';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {colors} from '../../../constants/constants';
 
 export default function LunchCard({
-  Name = 'unKnown User',
+  Name = 'unknown User ',
   paidAmount = 0,
   totalRoti = 0,
-  description = 'NULL',
+  description = 'Empty',
 }) {
   const styles = getStyles();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -15,17 +17,13 @@ export default function LunchCard({
   const [complete, setComplete] = useState('white');
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.header,
-          {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          },
-        ]}>
+      <View style={styles.header}>
+        <FontAwesome5 name={'user-circle'} size={35} color={complete} />
         <Text
-          style={[styles.title, {textTransform: 'uppercase', color: complete}]}>
+          style={[
+            styles.title,
+            {textTransform: 'uppercase', color: complete, fontSize: 20},
+          ]}>
           {Name}
         </Text>
         <CheckBox
@@ -34,10 +32,9 @@ export default function LunchCard({
           onValueChange={newValue => {
             setToggleCheckBox(newValue);
             setDisable(!toggleCheckBox);
-            setComplete('#000000');
+            setComplete(colors.black);
           }}
         />
-        {/* {console.log(toggleCheckBox)} */}
       </View>
       <View style={styles.details}>
         <View
@@ -46,7 +43,7 @@ export default function LunchCard({
             alignItems: 'center',
           }}>
           <Text style={styles.title}>Paid Amount:</Text>
-          <Text> {paidAmount} Rupee</Text>
+          <Text style={{color: colors.black}}> {paidAmount} Rupee</Text>
         </View>
 
         <View
@@ -55,7 +52,7 @@ export default function LunchCard({
             alignItems: 'center',
           }}>
           <Text style={styles.title}>Roti: </Text>
-          <Text> {totalRoti} </Text>
+          <Text style={{color: colors.black}}> {totalRoti} </Text>
         </View>
         <Text
           style={[
@@ -64,10 +61,13 @@ export default function LunchCard({
               borderTopWidth: 1,
               borderTopColor: 'white',
               marginTop: 10,
-              paddingTop: 10,
+              paddingTop: 20,
+              fontSize: 15,
+              fontWeight: '500',
+              lineHeight: 20,
             },
           ]}>
-          Description: {description}
+          {description}
         </Text>
       </View>
     </View>
