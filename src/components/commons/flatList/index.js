@@ -10,36 +10,39 @@ export default function FlatDataList({Data}) {
     <FlatList
       data={Data}
       renderItem={element => {
+        const employeeName = element.item.employeeName;
         return (
-          <View
-            style={{
-              marginLeft: 16,
-              marginRight: 16,
-              marginBottom: 15,
-              overflow: 'hidden',
-              borderRadius: 12,
-            }}>
-            <View
-              style={{
-                backgroundColor: colors.main,
-                padding: 20,
-                justifyContent: 'center',
-              }}>
-              <Text style={[styles.listTitle, {color: 'white'}]}>
-                {element.item.employeeName}
+          <View style={styles.container}>
+            <View style={styles.heading}>
+              <Text
+                style={[
+                  styles.listTitle,
+                  {color: colors.lightGrey, textTransform: 'capitalize'},
+                ]}>
+                {employeeName.replace('_', ' ').replace('-', ' ')}
               </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <View style={{backgroundColor: colors.black, padding: 10}}>
-                {/* {element.item.teaVolume === 'Half Cup' ? (
-                  <SimpleLineIcons name={'cup'} size={50} color={colors.main} />
+              <View style={{backgroundColor: colors.lightGrey, padding: 20}}>
+                {element.item.teaVolume === 'Half Cup' ? (
+                  <View style={{position: 'relative'}}>
+                    <SimpleLineIcons
+                      name={'cup'}
+                      size={50}
+                      color={colors.main}
+                    />
+                    <View style={styles.absoluteFull} />
+                  </View>
                 ) : (
-                  <SimpleLineIcons
-                    name={'cup'}
-                    size={50}
-                    color={colors.black}
-                  />
-                )} */}
+                  <View style={{position: 'relative'}}>
+                    <SimpleLineIcons
+                      name={'cup'}
+                      size={50}
+                      color={colors.main}
+                    />
+                    <View style={styles.absoluteHalf} />
+                  </View>
+                )}
               </View>
               <View
                 style={{
@@ -48,10 +51,14 @@ export default function FlatDataList({Data}) {
                   justifyContent: 'center',
                   padding: 10,
                 }}>
-                <Text style={styles.listTitle}>{element.item.teaVolume}</Text>
-                <Text style={styles.listTitle}>
-                  Sugar:{' '}
-                  {element.item.sugerQuantity ? element.item.sugerQuantity : 0}
+                <Text style={styles.listSubTitle}>
+                  {element.item.teaVolume}
+                </Text>
+                <Text style={styles.listSubTitle}>
+                  Sugar Quantity:
+                  {element.item.sugerQuantity
+                    ? ' ' + element.item.sugerQuantity
+                    : ' N/A'}
                 </Text>
               </View>
             </View>

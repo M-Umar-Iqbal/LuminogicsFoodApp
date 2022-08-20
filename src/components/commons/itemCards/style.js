@@ -17,7 +17,6 @@ const getStyles = () =>
       borderBottomRightRadius: 20,
       flexDirection: 'row',
       backgroundColor: colors.lightGrey,
-      elevation: 10,
     },
   });
 export default getStyles;

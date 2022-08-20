@@ -7,8 +7,6 @@ const styles = () =>
       fontSize: 20,
     },
     mainContainer: {
-      flex: 1,
-
       alignItems: 'center',
     },
     container: {
@@ -26,11 +24,7 @@ const styles = () =>
     cardContainer: {
       margin: 20,
     },
-    TextInputContainer: {
-      paddingTop: 10,
-      paddingLeft: 5,
-      paddingRight: 5,
-    },
+
     cardTitle: {
       color: 'black',
       fontWeight: '500',
@@ -51,14 +45,13 @@ const styles = () =>
       paddingLeft: 20,
     },
     customButtonContainer: {
-      marginTop: 20,
+      marginTop: 5,
       backgroundColor: colors.main,
-      padding: 22,
-      width: '95%',
+      padding: 20,
+      width: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-      borderRadius: 10,
-      elevation: 20,
+      elevation: 10,
     },
     customButtonTitle: {
       color: 'white',
@@ -66,11 +59,13 @@ const styles = () =>
       textTransform: 'uppercase',
     },
     gap: {
-      marginTop: 10,
+      marginTop: 5,
       marginBottom: 5,
     },
     error: {
       color: 'red',
+      fontSize: 13,
+      fontWeight: '500',
     },
   });
 export default styles;

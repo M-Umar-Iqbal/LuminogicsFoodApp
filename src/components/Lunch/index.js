@@ -7,12 +7,15 @@ import OrderDetail from '../commons/orderDetails';
 import URL, {colors} from '../../constants/constants';
 import axios from 'axios';
 import LoadingIndicator from '../commons/loadingIndicator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const today = new Date();
+
 export default function Lunch({navigation: {goBack}}) {
   const [Data, setData] = useState([]);
   const [totalRoti, setTotalRoti] = useState(0);
-  const [date, setDate] = useState('');
-
+  const [checkData, setCheckData] = useState();
   const styles = getStyles();
+
   function confirmExit() {
     goBack();
     return true;
@@ -24,24 +27,39 @@ export default function Lunch({navigation: {goBack}}) {
   }, []);
 
   async function getAll() {
-    let res = await axios.get(`${URL}/api/admin/get-available-orders/Lunch`);
-    // console.log(res?.data?.payload?.data?.TotalRoti);
-
-    setTotalRoti(res?.data?.payload?.data?.TotalRoti);
-    setData(res?.data?.payload?.data?.orders);
-    setDate(res?.data?.payload?.data?.orders[0].orderDate);
+    const token = await AsyncStorage.getItem('token');
+    let res = await axios.get(`${URL}/api/admin/get-available-orders/Lunch`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    if (
+      res?.data?.metadata?.status === 'SUCCESS' &&
+      res?.data?.metadata?.message === 'No Record Found'
+    ) {
+      setCheckData(null);
+    } else {
+      setTotalRoti(res?.data?.payload?.data?.TotalRoti);
+      setData(res?.data?.payload?.data?.orders);
+    }
   }
 
   return (
     <View flex={1} style={styles.container}>
       <OrderDetail
         title="Launch Requirements"
-        date={date}
+        date={
+          today.getDate() +
+          '/' +
+          (today.getMonth() + 1) +
+          '/' +
+          today.getFullYear()
+        }
         item="Roti"
         total={totalRoti}
       />
       {Data.length !== 0 ? (
-        <View flex={7.5}>
+        <View flex={7.5} style={{marginLeft: 16, marginRight: 16}}>
           <ScrollView>
             {Data.map((e, index) => (
               <LunchCard
@@ -56,7 +74,7 @@ export default function Lunch({navigation: {goBack}}) {
         </View>
       ) : (
         <View flex={7.5}>
-          <LoadingIndicator />
+          <LoadingIndicator title={checkData === null ? true : false} />
         </View>
       )}
     </View>

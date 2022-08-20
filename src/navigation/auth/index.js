@@ -1,35 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {View, Text, SafeAreaView} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-// import HomeScreen from 'D:/nativeApp/src/components/Home';
-import HomeScreen from '../../components/Login';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// import login from 'D:/nativeApp/src/components/Home';
+import Login from '../../components/Login';
 import Dashboard from '../../components/Dashboard';
 import EveningTea from '../../components/eveningTeaGenerateReport';
 import MorningTea from '../../components/morningTeaGenerateReport';
+import Profile from '../../components/profile';
+
 import Lunch from '../../components/Lunch';
 import {colors} from '../../constants/constants';
 
-const Stack = createNativeStackNavigator();
-export default function StackNavigation({navigation}) {
+const AuthStack = createNativeStackNavigator();
+
+export default function AuthNavigation() {
   return (
-    <Stack.Navigator
-      initialRouteName="Dash_board"
+    <AuthStack.Navigator
+      initialRouteName="login"
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen
-        name="Login"
-        component={HomeScreen}
-        options={{title: 'Home', headerTitleAlign: 'center'}}
-      />
-
-      <Stack.Screen
-        name="ProfileScreen"
-        component={HomeScreen}
+      <AuthStack.Screen
+        name="login"
+        component={Login}
         options={{
           title: 'Admin Login',
           headerTitleAlign: 'center',
@@ -37,8 +31,8 @@ export default function StackNavigation({navigation}) {
         }}
       />
 
-      <Stack.Screen
-        name="Dash_board"
+      <AuthStack.Screen
+        name="dashBoard"
         component={Dashboard}
         options={{
           // headerStyle: {
@@ -47,16 +41,37 @@ export default function StackNavigation({navigation}) {
 
           title: 'Dashboard',
           headerTitleAlign: 'center',
-          headerShown: true,
-          headerBackVisible: false,
-          headerRight: () => (
-            <TouchableOpacity onPress={() => alert('Logout')}>
-              <MaterialIcons name={'logout'} size={30} color={colors.main} />
-            </TouchableOpacity>
-          ),
+          //   headerShown: true,
+          // headerBackVisible: false,
+          //   headerRight: () => (
+          //     <TouchableOpacity onPress={() => storeData('null')}>
+          //       <MaterialIcons name={'logout'} size={30} color={colors.main} />
+          //     </TouchableOpacity>
+          //   ),
         }}
       />
-      <Stack.Screen
+      <AuthStack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerStyle: {
+            backgroundColor: colors.main,
+          },
+          headerTitleStyle: {
+            color: colors.lightGrey,
+          },
+          headerTintColor: colors.lightGrey,
+          // headerStyle: {
+          //     color: colors.lightGrey,
+          //   },
+          title: 'Profile',
+          headerTitleAlign: 'center',
+          headerShown: true,
+
+          // headerBackVisible: false,
+        }}
+      />
+      <AuthStack.Screen
         name="EveningTea"
         component={EveningTea}
         options={{
@@ -64,19 +79,27 @@ export default function StackNavigation({navigation}) {
             backgroundColor: colors.main,
           },
 
+          headerTitleStyle: {
+            color: colors.lightGrey,
+          },
+          headerTintColor: colors.lightGrey,
           title: 'Evening Tea',
           headerTitleAlign: 'center',
           headerShown: true,
           // headerBackVisible: false,
         }}
       />
-      <Stack.Screen
+      <AuthStack.Screen
         name="MorningTea"
         component={MorningTea}
         options={{
           headerStyle: {
             backgroundColor: colors.main,
           },
+          headerTitleStyle: {
+            color: colors.lightGrey,
+          },
+          headerTintColor: colors.lightGrey,
           title: 'Morning Tea',
           headerTitleAlign: 'center',
           headerShown: true,
@@ -84,20 +107,24 @@ export default function StackNavigation({navigation}) {
         }}
       />
 
-      <Stack.Screen
+      <AuthStack.Screen
         name="Lunch"
         component={Lunch}
         options={{
           headerStyle: {
             backgroundColor: colors.main,
           },
+          headerTitleStyle: {
+            color: colors.lightGrey,
+          },
+          headerTintColor: colors.lightGrey,
           title: 'Launch',
           headerTitleAlign: 'center',
           headerShown: true,
           // headerBackVisible: false,
         }}
       />
-    </Stack.Navigator>
+    </AuthStack.Navigator>
   );
 }
 const styles = StyleSheet.create({

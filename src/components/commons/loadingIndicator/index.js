@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import React from 'react';
 import {colors} from '../../../constants/constants';
-export default function LoadingIndicator() {
+export default function LoadingIndicator({title}) {
   return (
     <View
       style={{
@@ -9,9 +9,6 @@ export default function LoadingIndicator() {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text style={{color: 'black', fontSize: 15, fontWeight: '500'}}>
-        Nothing To Display
-      </Text>
       <View
         style={{
           flexDirection: 'row',
@@ -19,14 +16,30 @@ export default function LoadingIndicator() {
           alignItems: 'center',
           // backgroundColor: 'red',
           height: 50,
-          width: 100,
+          width: 150,
         }}>
-        <Text style={{color: 'black', fontSize: 15}}>Loading </Text>
-        <ActivityIndicator
-          size={15}
-          color={colors.main}
-          style={{marginLeft: 5}}
-        />
+        {title ? (
+          <Text style={{color: 'black', fontSize: 15, fontWeight: '500'}}>
+            No Orders Placed Yet
+          </Text>
+        ) : (
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              // backgroundColor: 'red',
+              height: 50,
+              width: 150,
+            }}>
+            <Text style={{color: 'black', fontSize: 15}}>Loading </Text>
+            <ActivityIndicator
+              size={15}
+              color={colors.main}
+              style={{marginLeft: 5}}
+            />
+          </View>
+        )}
       </View>
     </View>
   );

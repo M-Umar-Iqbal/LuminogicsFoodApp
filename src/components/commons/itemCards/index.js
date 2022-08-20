@@ -10,12 +10,22 @@ function Card({
   Title = 'Title Not Available',
   img = 'pizza-slice',
   color = 'grey',
-  onPress = () => console.log('No Screen Available'),
+  onPress = () => 'No Screen Available',
   helperText = 'Helper Text Not Available',
+  disabled = false,
 }) {
+  let colorDarkGrey = colors.darkGrey;
+  let colorBlack = colors.black;
   const styles = getStyles();
+  {
+    disabled
+      ? ((color = colors.lightGrey),
+        (colorDarkGrey = colors.disabledGrey),
+        (colorBlack = colors.disabledGrey))
+      : color;
+  }
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {elevation: disabled ? 0 : 10}]}>
       <View
         style={{
           backgroundColor: 'white',
@@ -35,7 +45,7 @@ function Card({
         }}>
         <Text
           style={{
-            color: 'black',
+            color: colorBlack,
             fontSize: 15,
             width: '60%',
             fontWeight: '700',
@@ -48,17 +58,20 @@ function Card({
           style={{
             textAlign: 'left',
             width: '60%',
-            color: 'black',
+            color: colorBlack,
             fontSize: 15,
             flexWrap: 'wrap',
           }}>
           {helperText}
         </Text>
       </View>
-      <TouchableOpacity onPress={onPress} style={{width: '15%'}}>
+      <TouchableOpacity
+        onPress={onPress}
+        style={{width: '15%'}}
+        disabled={disabled}>
         <View
           style={{
-            backgroundColor: colors.darkGrey,
+            backgroundColor: colorDarkGrey,
             justifyContent: 'center',
             alignItems: 'center',
             height: '100%',

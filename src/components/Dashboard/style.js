@@ -4,7 +4,7 @@ import {colors} from '../../constants/constants';
 const getStyles = () =>
   StyleSheet.create({
     container: {
-      paddingTop: 20,
+      paddingTop: 40,
       flex: 1,
       justifyContent: 'space-evenly',
       flexDirection: 'row',

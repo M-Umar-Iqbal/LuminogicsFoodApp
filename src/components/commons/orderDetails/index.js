@@ -1,22 +1,27 @@
 import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import {Divider} from '@react-native-material/core';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import getStyles from './style';
 import {colors} from '../../../constants/constants';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+const today = new Date();
 
 export default function orderDetail({
   title = 'Unknown Title',
-  date = 'Loading ...',
+  date = '00/00/0000',
   item = 'items',
   total = 0,
   fullCups = null,
   halfCups = null,
 }) {
   const styles = getStyles();
+  const [flex, setFlex] = useState(3);
+  useEffect(() => {
+    item === 'Roti' ? setFlex(2) : setFlex(3);
+  }, []);
 
   return (
-    <View flex={3}>
+    <View flex={flex}>
       {/* <View style={styles.detailContainer}>
         <View style={{alignItems: 'center', padding: 15}}>
           <Text style={styles.mainHeading}>{title}</Text>
@@ -41,7 +46,13 @@ export default function orderDetail({
           }}>
           <Fontisto name={'date'} size={30} color={colors.main} />
           <Text style={[styles.subHeading, {fontSize: 25, marginLeft: 20}]}>
-            {date ? date : 'Loading ...'}
+            {date
+              ? date
+              : today.getDate() +
+                '/' +
+                (today.getMonth() + 1) +
+                '/' +
+                today.getFullYear()}
           </Text>
         </View>
         <Divider style={{marginTop: 20, marginBottom: 20}} leadingInset={0} />
@@ -61,6 +72,7 @@ export default function orderDetail({
             />
           </View>
         ) : null}
+
         <Text style={[styles.subHeading, {color: colors.black, fontSize: 12}]}>
           Total {item}: {total}
         </Text>

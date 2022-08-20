@@ -1,22 +1,9 @@
 import React from 'react';
-import Navigation from './src/navigation/main';
+import Navigation from './src/navigation/auth';
 import {NavigationContainer} from '@react-navigation/native';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import MainNavigation from './src/navigation';
 const App = () => {
-  return (
-    <NavigationContainer>
-      <Navigation />
-    </NavigationContainer>
-  );
+  return <MainNavigation />;
 };
 
 export default App;

@@ -26,7 +26,7 @@ const MyComponent = ({
         leading={props => (
           <MaterialIcons name={icon} size={iconSize} solid color={color} />
         )}
-        onChangeText={e => setText(e)}
+        onChangeText={e => setText(e.toLowerCase())}
         keyboardType={Type}
         secureTextEntry={secure}
       />
@@ -51,7 +51,7 @@ const MyComponent = ({
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    width: 350,
+    width: 400,
   },
 });
 

@@ -7,13 +7,16 @@ import FlatDataList from '../commons/flatList';
 import LoadingIndicator from '../commons/loadingIndicator';
 import URL from '../../constants/constants';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const today = new Date();
+
 const TeaGenerateReport = ({navigation: {goBack}}) => {
   const styles = getStyles();
   const [totalCup, setTotalCup] = useState(0);
   const [halfCup, setHalfCup] = useState(0);
   const [fullCup, setFullCup] = useState(0);
+  const [checkData, setCheckData] = useState();
 
-  const [date, setDate] = useState(null);
   const [Data, setData] = useState([]);
   function confirmExit() {
     goBack();
@@ -26,21 +29,43 @@ const TeaGenerateReport = ({navigation: {goBack}}) => {
   }, []);
 
   async function getAll() {
+    const token = await AsyncStorage.getItem('token');
+
     let res = await axios.get(
       `${URL}/api/admin/get-available-orders/Evening-Tea`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      },
     );
-    setTotalCup(res?.data?.payload?.data?.TotalCups);
-    setDate(res?.data?.payload?.data?.orders[0].orderDate);
-    setData(res?.data?.payload?.data?.orders);
-    setHalfCup(res?.data?.payload?.data?.HalfCups);
-    setFullCup(res?.data?.payload?.data?.FullCups);
+    if (
+      res?.data?.metadata?.status === 'SUCCESS' &&
+      res?.data?.metadata?.message === 'No Record Found'
+    ) {
+      setCheckData(null);
+      res?.data?.metadata?.status;
+    } else {
+      setTotalCup(res?.data?.payload?.data?.TotalCups);
+
+      setData(res?.data?.payload?.data?.orders);
+      setHalfCup(res?.data?.payload?.data?.HalfCups);
+      setFullCup(res?.data?.payload?.data?.FullCups);
+      setCheckData(res?.data?.metadata?.status);
+    }
   }
 
   return (
     <View flex={1} style={{backgroundColor: '#ffffff'}}>
       <OrderDetail
         title="Evening Tea Requirements"
-        date={date}
+        date={
+          today.getDate() +
+          '/' +
+          (today.getMonth() + 1) +
+          '/' +
+          today.getFullYear()
+        }
         item="Cups"
         total={totalCup}
         fullCups={fullCup}
@@ -50,7 +75,7 @@ const TeaGenerateReport = ({navigation: {goBack}}) => {
         {Data.length !== 0 ? (
           <FlatDataList Data={Data} />
         ) : (
-          <LoadingIndicator />
+          <LoadingIndicator title={checkData === null ? true : false} />
         )}
       </View>
     </View>
