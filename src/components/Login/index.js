@@ -1,19 +1,19 @@
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
+  ScrollView,
   View,
   ToastAndroid,
-  Alert,
   Keyboard,
-  ActivityIndicator,
   TouchableWithoutFeedback,
+  Image,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {colors} from '../../constants/constants';
 import URL from '../../constants/constants';
 import getStyles from './style';
-import MaterialIcons from 'react-native-vector-icons/Ionicons';
+
+import {Button} from 'react-native-paper';
 import InputField from '../commons/inputField';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -74,19 +74,6 @@ export default function Home({navigation}) {
       setPasswordErrorColor(colors.main);
       return true;
     }
-
-    // if (regex_password === password) {
-    //   setPasswordError('');
-    //   setPasswordErrorColor(colors.main);
-    //   return true;
-    // } else if (password.trim() === '') {
-    //   setPasswordErrorColor('red');
-    //   setPasswordError('This field is required');
-    // } else {
-    //   setPasswordErrorColor('red');
-    //   setPasswordError('Please Enter a valid Password');
-    //   return false;
-    // }
   }
 
   function checkValidation() {
@@ -112,6 +99,7 @@ export default function Home({navigation}) {
         })
         .catch(function (error) {
           setLoader(false);
+          ToastAndroid.show('Something Went Wrong', ToastAndroid.SHORT);
           error.response.data.metadata.message == 400 ? (
             ToastAndroid.show('Error Occurred', ToastAndroid.SHORT)
           ) : (
@@ -131,15 +119,18 @@ export default function Home({navigation}) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View flex={1} style={{backgroundColor: colors.lightGrey}}>
+      <ScrollView flex={1} style={{backgroundColor: colors.lightGrey}}>
         <View style={styles.cardText}>
-          <MaterialIcons
-            name={'fast-food-outline'}
-            size={110}
-            color={colors.main}
+          <Image
+            style={{width: 100, height: 100}}
+            source={require('../../assets/images/hamburger.png')}
           />
+          <Text style={styles.logoText}>Lumeal</Text>
         </View>
         <View style={styles.mainContainer}>
+          <View style={{width: '85%'}}>
+            <Text style={styles.loginText}>Login</Text>
+          </View>
           <View style={styles.cardContainer}>
             <View style={styles.gap}>
               <InputField
@@ -171,19 +162,43 @@ export default function Home({navigation}) {
             </View>
 
             <View style={styles.container}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.customButtonContainer}
                 onPress={checkValidation}>
                 {!loader ? (
-                  <Text style={styles.customButtonTitle}>Login</Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={styles.customButtonTitle}>Login</Text>
+                    <MaterialIcons
+                      name="login"
+                      size={15}
+                      solid
+                      color={colors.lightGrey}
+                      style={{marginLeft: 5}}
+                    />
+                  </View>
                 ) : (
                   <ActivityIndicator size={20} color="#ffffff" />
                 )}
-              </TouchableOpacity>
+              </TouchableOpacity> */}
+              <Button
+                style={styles.customButtonContainer}
+                icon="login"
+                mode="contained"
+                buttonColor={colors.main}
+                onPress={checkValidation}
+                loading={loader}
+                contentStyle={{height: 60, width: 370}}>
+                Login
+              </Button>
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 }
