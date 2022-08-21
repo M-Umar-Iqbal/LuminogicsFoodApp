@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Image, Text} from 'react-native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import login from 'D:/nativeApp/src/components/Home';
@@ -11,16 +11,48 @@ import Profile from '../../components/profile';
 
 import Lunch from '../../components/Lunch';
 import {colors} from '../../constants/constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AuthStack = createNativeStackNavigator();
 
+function SplashScreen({navigation}) {
+  setTimeout(() => {
+    navigation.replace('login');
+  }, 1000);
+
+  return (
+    <View
+      flex={1}
+      style={{
+        backgroundColor: colors.main,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Image
+        style={{width: 100, height: 100}}
+        source={require('../../assets/images/hamburger.png')}
+      />
+      <Text style={styles.logoText}>Lumeal</Text>
+    </View>
+  );
+}
 export default function AuthNavigation() {
   return (
     <AuthStack.Navigator
-      initialRouteName="login"
+      initialRouteName="splash"
       screenOptions={{
         headerShown: false,
       }}>
+      <AuthStack.Screen
+        name="splash"
+        component={SplashScreen}
+        options={{
+          title: 'Splash',
+          headerTitleAlign: 'center',
+          headerShown: false,
+        }}
+      />
+
       <AuthStack.Screen
         name="login"
         component={Login}
@@ -128,27 +160,11 @@ export default function AuthNavigation() {
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    color: 'black',
-  },
-  button: {
-    width: '10%',
-  },
-  customButtonContainer: {
-    backgroundColor: 'green',
-    padding: 10,
-    width: 170,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  customButtonTitle: {
-    color: 'white',
-    fontWeight: '400',
+  logoText: {
+    marginTop: 5,
+    color: colors.lightGrey,
+    fontSize: 50,
+    fontWeight: '900',
+    // fontFamily: 'Helvetica',
   },
 });

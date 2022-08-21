@@ -9,11 +9,13 @@ const Navigation = () => {
 
   useEffect(() => {
     getAll();
-  }, []);
+  }, [loggedIn]);
 
   async function getAll() {
     const Data = await AsyncStorage.getItem('token');
-    Data !== 'null' ? setLoggedIn(true) : setLoggedIn(false);
+
+    Data !== 'null' && Data ? setLoggedIn(true) : setLoggedIn(false);
+
     console.log(Data);
   }
 
