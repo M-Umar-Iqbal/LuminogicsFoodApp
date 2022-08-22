@@ -47,7 +47,7 @@ export default function LunchCard({
             flexDirection: 'row',
             alignItems: 'center',
           }}>
-          <Text style={styles.title}>Paid Amount:</Text>
+          <Text style={styles.title}>Paid Amount</Text>
           <Text style={{color: colors.black}}> {paidAmount} Rupee</Text>
         </View>
 
@@ -56,7 +56,7 @@ export default function LunchCard({
             flexDirection: 'row',
             alignItems: 'center',
           }}>
-          <Text style={styles.title}>Roti: </Text>
+          <Text style={styles.title}>Roti : </Text>
           <Text style={{color: colors.black}}> {totalRoti} </Text>
         </View>
         <Text

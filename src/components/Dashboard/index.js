@@ -24,7 +24,6 @@ import {
   lunchEnd,
 } from '../../constants/constants';
 import CheckInternet from '../../components/commons/checkInternet/index.js';
-import {AuthContext} from '../../providers/provider';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -44,7 +43,7 @@ export default function Dashboard({navigation}) {
     setToken(token);
   }
 
-  function inTime(start, end) {
+  function checkTime(start, end) {
     var now = new Date();
     var time = now.getHours() * 60 + now.getMinutes();
     time;
@@ -142,7 +141,7 @@ export default function Dashboard({navigation}) {
             color="#9ED2C6"
             onPress={() => navigation.navigate('MorningTea')}
             helperText="The report can be generated after 11:00 AM"
-            disabled={inTime(morningTeaStart, morningTeaEnd) ? false : true}
+            disabled={checkTime(morningTeaStart, morningTeaEnd) ? false : true}
           />
           <Card
             Title="Lunch"
@@ -150,7 +149,7 @@ export default function Dashboard({navigation}) {
             color="#D36B00"
             onPress={() => navigation.navigate('Lunch')}
             helperText="The report can be generated after 01:00 PM"
-            disabled={inTime(lunchStart, lunchEnd) ? false : true}
+            disabled={checkTime(lunchStart, lunchEnd) ? false : true}
           />
 
           <Card
@@ -159,7 +158,7 @@ export default function Dashboard({navigation}) {
             color="#FEC260"
             onPress={() => navigation.navigate('EveningTea')}
             helperText="The report can be generated after 05:00 PM"
-            disabled={inTime(eveningTeaStart, eveningTeaEnd) ? false : true}
+            disabled={checkTime(eveningTeaStart, eveningTeaEnd) ? false : true}
           />
         </View>
       </ScrollView>

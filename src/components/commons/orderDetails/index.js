@@ -74,7 +74,7 @@ export default function orderDetail({
         ) : null}
 
         <Text style={[styles.subHeading, {color: colors.black, fontSize: 12}]}>
-          Total {item}: {total}
+          Total {item} : {total}
         </Text>
       </View>
     </View>
