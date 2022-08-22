@@ -158,7 +158,7 @@ export default function AppNavigation() {
               color: colors.lightGrey,
             },
             headerTintColor: colors.lightGrey,
-            title: 'Launch',
+            title: 'Lunch',
             headerTitleAlign: 'center',
             headerShown: true,
             // headerBackVisible: false,

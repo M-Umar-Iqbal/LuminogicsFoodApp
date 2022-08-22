@@ -18,6 +18,7 @@ const getStyles = () =>
       marginBottom: 10,
       borderRadius: 20,
       overflow: 'hidden',
+      elevation: 5,
     },
     header: {
       flexDirection: 'row',

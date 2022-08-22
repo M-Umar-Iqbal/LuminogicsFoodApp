@@ -136,7 +136,6 @@ export default function Home({navigation}) {
             <View style={styles.gap}>
               <InputField
                 placeholder="Email"
-                variant="outlined"
                 color={emailErrorColor}
                 icon="mail-outline"
                 iconSize={25}
@@ -150,7 +149,6 @@ export default function Home({navigation}) {
             <View style={styles.gap}>
               <InputField
                 placeholder="Password"
-                variant="outlined"
                 color={passwordErrorColor}
                 icon="lock-outline"
                 iconSize={25}

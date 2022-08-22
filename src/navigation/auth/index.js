@@ -163,7 +163,7 @@ export default function AuthNavigation() {
               color: colors.lightGrey,
             },
             headerTintColor: colors.lightGrey,
-            title: 'Launch',
+            title: 'Lunch',
             headerTitleAlign: 'center',
             headerShown: true,
             // headerBackVisible: false,

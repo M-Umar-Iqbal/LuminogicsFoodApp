@@ -9,7 +9,7 @@ export default function LunchCard({
   Name = 'unknown User ',
   paidAmount = 0,
   totalRoti = 0,
-  description = 'Empty',
+  description = 'Not Available',
 }) {
   const styles = getStyles();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -59,21 +59,22 @@ export default function LunchCard({
           <Text style={styles.title}>Roti : </Text>
           <Text style={{color: colors.black}}> {totalRoti} </Text>
         </View>
+
         <Text
-          style={[
-            styles.description,
-            {
-              borderTopWidth: 3,
-              borderTopColor: 'white',
-              marginTop: 10,
-              paddingTop: 7,
-              fontSize: 15,
-              fontWeight: '500',
-              lineHeight: 20,
-            },
-          ]}>
-          {description}
+          style={{
+            borderTopWidth: 3,
+            borderTopColor: 'white',
+            color: 'black',
+            marginTop: 10,
+
+            paddingTop: 10,
+            fontSize: 15,
+            fontWeight: '500',
+            lineHeight: 20,
+          }}>
+          Description
         </Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
     </View>
   );

@@ -39,13 +39,11 @@ const styles = () =>
     },
 
     customButtonContainer: {
-      marginTop: 10,
-      // padding: 20,
-
+      marginTop: 5,
       justifyContent: 'center',
       alignItems: 'center',
       elevation: 20,
-      borderRadius: 5,
+      borderRadius: 12,
     },
     customButtonTitle: {
       fontSize: 15,
