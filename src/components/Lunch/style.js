@@ -1,14 +1,13 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../constants/constants';
+
 const getStyles = () =>
   StyleSheet.create({
     title: {
-      color: '#fff',
+      color: colors.black,
     },
     container: {
-      flex: 1,
-      backgroundColor: 'blue',
-      justifyContent: 'center',
-      alignItems: 'center',
+      backgroundColor: '#fff',
     },
   });
 export default getStyles;

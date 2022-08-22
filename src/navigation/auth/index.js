@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AddToken} from '../../redux/actions/action';
-// import login from 'D:/nativeApp/src/components/Home';
 import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// import login from 'D:/nativeApp/src/components/Home';
 import Login from '../../components/Login';
 import Dashboard from '../../components/Dashboard';
 import EveningTea from '../../components/eveningTea';
@@ -13,11 +13,14 @@ import Profile from '../../components/profile';
 import Lunch from '../../components/Lunch';
 import {colors} from '../../constants/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const Stack = createNativeStackNavigator();
+
+const AuthStack = createNativeStackNavigator();
+
 function SplashScreen({navigation}) {
   const dispatch = useDispatch();
+
   setTimeout(() => {
-    navigation.replace('dashBoard');
+    navigation.replace('login');
   }, 3000);
 
   useEffect(() => {
@@ -26,9 +29,9 @@ function SplashScreen({navigation}) {
 
   async function CheckToken() {
     const Data = await AsyncStorage.getItem('token');
+
     dispatch(AddToken(Data));
   }
-
   return (
     <View
       flex={1}
@@ -45,15 +48,15 @@ function SplashScreen({navigation}) {
     </View>
   );
 }
-export default function AppNavigation() {
+export default function AuthNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      <AuthStack.Navigator
         initialRouteName="splash"
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen
+        <AuthStack.Screen
           name="splash"
           component={SplashScreen}
           options={{
@@ -62,7 +65,8 @@ export default function AppNavigation() {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+
+        <AuthStack.Screen
           name="login"
           component={Login}
           options={{
@@ -71,29 +75,27 @@ export default function AppNavigation() {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+
+        <AuthStack.Screen
           name="dashBoard"
           component={Dashboard}
           options={{
             // headerStyle: {
             //   backgroundColor: '#45C5F0',
             // },
+
             title: 'Dashboard',
             headerTitleAlign: 'center',
-            headerTitleStyle: {
-              color: colors.lightGrey,
-            },
-            headerTintColor: colors.lightGrey,
-            // headerShown: true,
+            //   headerShown: true,
             // headerBackVisible: false,
-            // headerRight: () => (
-            //   <TouchableOpacity onPress={() => storeData('null')}>
-            //     <MaterialIcons name={'logout'} size={30} color={colors.main} />
-            //   </TouchableOpacity>
-            // ),
+            //   headerRight: () => (
+            //     <TouchableOpacity onPress={() => storeData('null')}>
+            //       <MaterialIcons name={'logout'} size={30} color={colors.main} />
+            //     </TouchableOpacity>
+            //   ),
           }}
         />
-        <Stack.Screen
+        <AuthStack.Screen
           name="Profile"
           component={Profile}
           options={{
@@ -104,20 +106,24 @@ export default function AppNavigation() {
               color: colors.lightGrey,
             },
             headerTintColor: colors.lightGrey,
-
+            // headerStyle: {
+            //     color: colors.lightGrey,
+            //   },
             title: 'Profile',
             headerTitleAlign: 'center',
             headerShown: true,
+
             // headerBackVisible: false,
           }}
         />
-        <Stack.Screen
+        <AuthStack.Screen
           name="EveningTea"
           component={EveningTea}
           options={{
             headerStyle: {
               backgroundColor: colors.main,
             },
+
             headerTitleStyle: {
               color: colors.lightGrey,
             },
@@ -128,7 +134,7 @@ export default function AppNavigation() {
             // headerBackVisible: false,
           }}
         />
-        <Stack.Screen
+        <AuthStack.Screen
           name="MorningTea"
           component={MorningTea}
           options={{
@@ -146,7 +152,7 @@ export default function AppNavigation() {
           }}
         />
 
-        <Stack.Screen
+        <AuthStack.Screen
           name="Lunch"
           component={Lunch}
           options={{
@@ -163,7 +169,7 @@ export default function AppNavigation() {
             // headerBackVisible: false,
           }}
         />
-      </Stack.Navigator>
+      </AuthStack.Navigator>
     </NavigationContainer>
   );
 }
@@ -173,5 +179,6 @@ const styles = StyleSheet.create({
     color: colors.lightGrey,
     fontSize: 50,
     fontWeight: '900',
+    // fontFamily: 'Helvetica',
   },
 });
