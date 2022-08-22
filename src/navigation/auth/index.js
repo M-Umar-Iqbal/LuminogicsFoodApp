@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
-
+import {useDispatch} from 'react-redux';
+import {AddToken} from '../../redux/actions/action';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import login from 'D:/nativeApp/src/components/Home';
 import Login from '../../components/Login';
@@ -15,9 +17,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const AuthStack = createNativeStackNavigator();
 
 function SplashScreen({navigation}) {
+  const dispatch = useDispatch();
+
   setTimeout(() => {
     navigation.replace('login');
-  }, 4000);
+  }, 3000);
 
   useEffect(() => {
     CheckToken();
@@ -25,7 +29,8 @@ function SplashScreen({navigation}) {
 
   async function CheckToken() {
     const Data = await AsyncStorage.getItem('token');
-    console.log('This is Login Token', Data);
+    console.log('This is Auth Navigation', Data);
+    dispatch(AddToken(Data));
   }
   return (
     <View
@@ -45,125 +50,127 @@ function SplashScreen({navigation}) {
 }
 export default function AuthNavigation() {
   return (
-    <AuthStack.Navigator
-      initialRouteName="splash"
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <AuthStack.Screen
-        name="splash"
-        component={SplashScreen}
-        options={{
-          title: 'Splash',
-          headerTitleAlign: 'center',
+    <NavigationContainer>
+      <AuthStack.Navigator
+        initialRouteName="splash"
+        screenOptions={{
           headerShown: false,
-        }}
-      />
+        }}>
+        <AuthStack.Screen
+          name="splash"
+          component={SplashScreen}
+          options={{
+            title: 'Splash',
+            headerTitleAlign: 'center',
+            headerShown: false,
+          }}
+        />
 
-      <AuthStack.Screen
-        name="login"
-        component={Login}
-        options={{
-          title: 'Admin Login',
-          headerTitleAlign: 'center',
-          headerShown: false,
-        }}
-      />
+        <AuthStack.Screen
+          name="login"
+          component={Login}
+          options={{
+            title: 'Admin Login',
+            headerTitleAlign: 'center',
+            headerShown: false,
+          }}
+        />
 
-      <AuthStack.Screen
-        name="dashBoard"
-        component={Dashboard}
-        options={{
-          // headerStyle: {
-          //   backgroundColor: '#45C5F0',
-          // },
+        <AuthStack.Screen
+          name="dashBoard"
+          component={Dashboard}
+          options={{
+            // headerStyle: {
+            //   backgroundColor: '#45C5F0',
+            // },
 
-          title: 'Dashboard',
-          headerTitleAlign: 'center',
-          //   headerShown: true,
-          // headerBackVisible: false,
-          //   headerRight: () => (
-          //     <TouchableOpacity onPress={() => storeData('null')}>
-          //       <MaterialIcons name={'logout'} size={30} color={colors.main} />
-          //     </TouchableOpacity>
-          //   ),
-        }}
-      />
-      <AuthStack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          // headerStyle: {
-          //     color: colors.lightGrey,
-          //   },
-          title: 'Profile',
-          headerTitleAlign: 'center',
-          headerShown: true,
+            title: 'Dashboard',
+            headerTitleAlign: 'center',
+            //   headerShown: true,
+            // headerBackVisible: false,
+            //   headerRight: () => (
+            //     <TouchableOpacity onPress={() => storeData('null')}>
+            //       <MaterialIcons name={'logout'} size={30} color={colors.main} />
+            //     </TouchableOpacity>
+            //   ),
+          }}
+        />
+        <AuthStack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            // headerStyle: {
+            //     color: colors.lightGrey,
+            //   },
+            title: 'Profile',
+            headerTitleAlign: 'center',
+            headerShown: true,
 
-          // headerBackVisible: false,
-        }}
-      />
-      <AuthStack.Screen
-        name="EveningTea"
-        component={EveningTea}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
+            // headerBackVisible: false,
+          }}
+        />
+        <AuthStack.Screen
+          name="EveningTea"
+          component={EveningTea}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
 
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          title: 'Evening Tea',
-          headerTitleAlign: 'center',
-          headerShown: true,
-          // headerBackVisible: false,
-        }}
-      />
-      <AuthStack.Screen
-        name="MorningTea"
-        component={MorningTea}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          title: 'Morning Tea',
-          headerTitleAlign: 'center',
-          headerShown: true,
-          // headerBackVisible: false,
-        }}
-      />
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            title: 'Evening Tea',
+            headerTitleAlign: 'center',
+            headerShown: true,
+            // headerBackVisible: false,
+          }}
+        />
+        <AuthStack.Screen
+          name="MorningTea"
+          component={MorningTea}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            title: 'Morning Tea',
+            headerTitleAlign: 'center',
+            headerShown: true,
+            // headerBackVisible: false,
+          }}
+        />
 
-      <AuthStack.Screen
-        name="Lunch"
-        component={Lunch}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          title: 'Launch',
-          headerTitleAlign: 'center',
-          headerShown: true,
-          // headerBackVisible: false,
-        }}
-      />
-    </AuthStack.Navigator>
+        <AuthStack.Screen
+          name="Lunch"
+          component={Lunch}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            title: 'Launch',
+            headerTitleAlign: 'center',
+            headerShown: true,
+            // headerBackVisible: false,
+          }}
+        />
+      </AuthStack.Navigator>
+    </NavigationContainer>
   );
 }
 const styles = StyleSheet.create({

@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
-
+import {useDispatch} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import {AddToken} from '../../redux/actions/action';
 // import login from 'D:/nativeApp/src/components/Home';
+import {NavigationContainer} from '@react-navigation/native';
 import Login from '../../components/Login';
 import Dashboard from '../../components/Dashboard';
 import EveningTea from '../../components/eveningTea';
@@ -14,9 +15,10 @@ import {colors} from '../../constants/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createNativeStackNavigator();
 function SplashScreen({navigation}) {
+  const dispatch = useDispatch();
   setTimeout(() => {
     navigation.replace('dashBoard');
-  }, 4000);
+  }, 3000);
 
   useEffect(() => {
     CheckToken();
@@ -24,7 +26,8 @@ function SplashScreen({navigation}) {
 
   async function CheckToken() {
     const Data = await AsyncStorage.getItem('token');
-    console.log('This is Token', Data);
+    dispatch(AddToken(Data));
+    console.log('This is Main Navigation File', Data);
   }
 
   return (
@@ -45,122 +48,124 @@ function SplashScreen({navigation}) {
 }
 export default function AppNavigation() {
   return (
-    <Stack.Navigator
-      initialRouteName="splash"
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <Stack.Screen
-        name="splash"
-        component={SplashScreen}
-        options={{
-          title: 'Splash',
-          headerTitleAlign: 'center',
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="splash"
+        screenOptions={{
           headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="login"
-        component={Login}
-        options={{
-          title: 'Admin Login',
-          headerTitleAlign: 'center',
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="dashBoard"
-        component={Dashboard}
-        options={{
-          // headerStyle: {
-          //   backgroundColor: '#45C5F0',
-          // },
-          title: 'Dashboard',
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          // headerShown: true,
-          // headerBackVisible: false,
-          // headerRight: () => (
-          //   <TouchableOpacity onPress={() => storeData('null')}>
-          //     <MaterialIcons name={'logout'} size={30} color={colors.main} />
-          //   </TouchableOpacity>
-          // ),
-        }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
+        }}>
+        <Stack.Screen
+          name="splash"
+          component={SplashScreen}
+          options={{
+            title: 'Splash',
+            headerTitleAlign: 'center',
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="login"
+          component={Login}
+          options={{
+            title: 'Admin Login',
+            headerTitleAlign: 'center',
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="dashBoard"
+          component={Dashboard}
+          options={{
+            // headerStyle: {
+            //   backgroundColor: '#45C5F0',
+            // },
+            title: 'Dashboard',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            // headerShown: true,
+            // headerBackVisible: false,
+            // headerRight: () => (
+            //   <TouchableOpacity onPress={() => storeData('null')}>
+            //     <MaterialIcons name={'logout'} size={30} color={colors.main} />
+            //   </TouchableOpacity>
+            // ),
+          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
 
-          title: 'Profile',
-          headerTitleAlign: 'center',
-          headerShown: true,
-          // headerBackVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="EveningTea"
-        component={EveningTea}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          title: 'Evening Tea',
-          headerTitleAlign: 'center',
-          headerShown: true,
-          // headerBackVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="MorningTea"
-        component={MorningTea}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          title: 'Morning Tea',
-          headerTitleAlign: 'center',
-          headerShown: true,
-          // headerBackVisible: false,
-        }}
-      />
+            title: 'Profile',
+            headerTitleAlign: 'center',
+            headerShown: true,
+            // headerBackVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="EveningTea"
+          component={EveningTea}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            title: 'Evening Tea',
+            headerTitleAlign: 'center',
+            headerShown: true,
+            // headerBackVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="MorningTea"
+          component={MorningTea}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            title: 'Morning Tea',
+            headerTitleAlign: 'center',
+            headerShown: true,
+            // headerBackVisible: false,
+          }}
+        />
 
-      <Stack.Screen
-        name="Lunch"
-        component={Lunch}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.main,
-          },
-          headerTitleStyle: {
-            color: colors.lightGrey,
-          },
-          headerTintColor: colors.lightGrey,
-          title: 'Launch',
-          headerTitleAlign: 'center',
-          headerShown: true,
-          // headerBackVisible: false,
-        }}
-      />
-    </Stack.Navigator>
+        <Stack.Screen
+          name="Lunch"
+          component={Lunch}
+          options={{
+            headerStyle: {
+              backgroundColor: colors.main,
+            },
+            headerTitleStyle: {
+              color: colors.lightGrey,
+            },
+            headerTintColor: colors.lightGrey,
+            title: 'Launch',
+            headerTitleAlign: 'center',
+            headerShown: true,
+            // headerBackVisible: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 const styles = StyleSheet.create({

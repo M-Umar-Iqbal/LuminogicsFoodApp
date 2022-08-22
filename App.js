@@ -1,12 +1,13 @@
 import React from 'react';
 import MainNavigation from './src/navigation';
-import {AuthProvider} from './src/providers/provider';
 
+import {Provider} from 'react-redux';
+import Store from './src/redux/store/store';
 const App = () => {
   return (
-    <AuthProvider>
+    <Provider store={Store}>
       <MainNavigation />
-    </AuthProvider>
+    </Provider>
   );
 };
 

@@ -1,3 +1,4 @@
+import {firstChild} from '@react-native-material/core';
 import {StyleSheet} from 'react-native';
 import {colors} from '../../../constants/constants';
 
@@ -8,9 +9,11 @@ const getStyles = () =>
     container: {
       marginLeft: 16,
       marginRight: 16,
-      marginBottom: 10,
+      marginBottom: 7,
+      marginTop: 7,
       overflow: 'hidden',
       borderRadius: 12,
+      elevation: 5,
     },
     heading: {
       backgroundColor: colors.main,

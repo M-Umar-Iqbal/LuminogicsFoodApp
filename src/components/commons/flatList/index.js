@@ -59,7 +59,7 @@ export default function FlatDataList({Data}) {
                   Sugar Quantity:
                   {element.item.sugerQuantity
                     ? ' ' + element.item.sugerQuantity
-                    : ' N/A'}
+                    : ' 0'}
                 </Text>
               </View>
             </View>
