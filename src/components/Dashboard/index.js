@@ -46,13 +46,11 @@ export default function Dashboard({navigation}) {
   function checkTime(start, end) {
     var now = new Date();
     var time = now.getHours() * 60 + now.getMinutes();
-    time;
     return time >= start && time < end;
   }
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-
     wait(100).then(() => setRefreshing(false));
   }, []);
 
