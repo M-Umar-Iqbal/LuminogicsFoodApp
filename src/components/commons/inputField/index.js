@@ -1,10 +1,12 @@
 //import liraries
 import {TextInput} from '@react-native-material/core';
-import {position} from 'native-base/lib/typescript/theme/styled-system';
-import React, {Component, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {colors} from '../../../constants/constants';
 // create a component
 const MyComponent = ({
   placeholder,
@@ -16,37 +18,38 @@ const MyComponent = ({
   Type,
   secure,
   rightIcon,
-  errorMsg,
 }) => {
-  const [remove, setRemove] = useState();
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
   return (
-    <View style={[styles.container, {position: 'relative'}]}>
+    <View style={styles.container}>
       <TextInput
+        textAlignVertical="center"
         placeholder={placeholder}
         variant={variant}
         color={color}
         leading={props => (
           <MaterialIcons name={icon} size={iconSize} solid color={color} />
         )}
+        trailing={props =>
+          rightIcon === 'remove-red-eye' && (
+            <MaterialCommunityIcons
+              name={isPasswordSecure ? 'eye-off' : 'eye'}
+              size={iconSize}
+              solid
+              color={colors.darkGrey}
+              onPress={() => {
+                isPasswordSecure
+                  ? setIsPasswordSecure(false)
+                  : setIsPasswordSecure(true);
+              }}
+            />
+          )
+        }
         onChangeText={e => setText(e.toLowerCase())}
         keyboardType={Type}
-        secureTextEntry={secure}
+        secureTextEntry={secure && isPasswordSecure}
       />
-
-      {/* <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: 39,
-          height: 45,
-          position: 'absolute',
-          right: 2,
-          top: 2.5,
-          backgroundColor: 'white',
-        }}>
-        <MaterialIcons name={rightIcon} size={iconSize} solid color={'grey'} />
-      </View> */}
     </View>
   );
 };

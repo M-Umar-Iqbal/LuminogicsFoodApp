@@ -5,10 +5,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import login from 'D:/nativeApp/src/components/Home';
 import Login from '../../components/Login';
 import Dashboard from '../../components/Dashboard';
-import EveningTea from '../../components/eveningTeaGenerateReport';
-import MorningTea from '../../components/morningTeaGenerateReport';
+import EveningTea from '../../components/eveningTea';
+import MorningTea from '../../components/morningTea';
 import Profile from '../../components/profile';
-
 import Lunch from '../../components/Lunch';
 import {colors} from '../../constants/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,8 +17,16 @@ const AuthStack = createNativeStackNavigator();
 function SplashScreen({navigation}) {
   setTimeout(() => {
     navigation.replace('login');
-  }, 1000);
+  }, 4000);
 
+  useEffect(() => {
+    CheckToken();
+  }, []);
+
+  async function CheckToken() {
+    const Data = await AsyncStorage.getItem('token');
+    console.log('This is Login Token', Data);
+  }
   return (
     <View
       flex={1}

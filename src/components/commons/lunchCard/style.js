@@ -23,11 +23,11 @@ const getStyles = () =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: 15,
+      padding: 10,
       backgroundColor: colors.main,
     },
     details: {
-      padding: 20,
+      padding: 12,
       backgroundColor: colors.lightGrey,
     },
   });

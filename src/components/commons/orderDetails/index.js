@@ -21,7 +21,7 @@ export default function orderDetail({
   }, []);
 
   return (
-    <View flex={flex}>
+    <View flex={flex} style={{marginBottom: 10}}>
       {/* <View style={styles.detailContainer}>
         <View style={{alignItems: 'center', padding: 15}}>
           <Text style={styles.mainHeading}>{title}</Text>

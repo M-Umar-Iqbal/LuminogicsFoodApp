@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, RefreshControl} from 'react-native';
 import React from 'react';
 import getStyles from './style';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -13,15 +13,13 @@ export default function FlatDataList({Data}) {
         const employeeName = element.item.employeeName;
         return (
           <View style={styles.container}>
-            <View style={styles.heading}>
+            {/* <View style={styles.heading}>
               <Text
                 style={[
                   styles.listTitle,
                   {color: colors.lightGrey, textTransform: 'capitalize'},
-                ]}>
-                {employeeName.replace('_', ' ').replace('-', ' ')}
-              </Text>
-            </View>
+                ]}></Text>
+            </View> */}
             <View style={{flexDirection: 'row'}}>
               <View style={{backgroundColor: colors.lightGrey, padding: 20}}>
                 {element.item.teaVolume === 'Half Cup' ? (
@@ -51,8 +49,11 @@ export default function FlatDataList({Data}) {
                   justifyContent: 'center',
                   padding: 10,
                 }}>
+                <Text style={[styles.listTitle, {textTransform: 'capitalize'}]}>
+                  {employeeName.replace('_', ' ').replace('-', ' ')}
+                </Text>
                 <Text style={styles.listSubTitle}>
-                  {element.item.teaVolume}
+                  {element.item.teaVolume ? element.item.teaVolume : 'N/A'}
                 </Text>
                 <Text style={styles.listSubTitle}>
                   Sugar Quantity:

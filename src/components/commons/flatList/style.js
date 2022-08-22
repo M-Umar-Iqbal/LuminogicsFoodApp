@@ -6,7 +6,6 @@ const getStyles = () =>
     listTitle: {color: colors.black, fontWeight: '800', fontSize: 20},
     listSubTitle: {color: colors.black, fontWeight: '400', fontSize: 15},
     container: {
-      marginTop: 15,
       marginLeft: 16,
       marginRight: 16,
       marginBottom: 10,

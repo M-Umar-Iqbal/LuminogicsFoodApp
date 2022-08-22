@@ -1,6 +1,7 @@
 import NetInfo from '@react-native-community/netinfo';
 import {View, Text, ToastAndroid} from 'react-native';
 import React, {Component} from 'react';
+
 class App extends Component {
   NetInfoSubscription = null;
   constructor(props) {

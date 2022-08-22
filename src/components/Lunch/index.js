@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, RefreshControl} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import getStyles from './style';
 import LunchCard from '../commons/lunchCard';
@@ -24,7 +24,17 @@ export default function Lunch({navigation: {goBack}}) {
 
   useEffect(() => {
     getAll();
+  }, refreshing);
+
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    wait(100).then(() => setRefreshing(false));
   }, []);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function getAll() {
     const token = await AsyncStorage.getItem('token');

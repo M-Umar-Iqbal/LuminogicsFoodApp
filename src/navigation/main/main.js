@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -6,8 +6,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import login from 'D:/nativeApp/src/components/Home';
 import Login from '../../components/Login';
 import Dashboard from '../../components/Dashboard';
-import EveningTea from '../../components/eveningTeaGenerateReport';
-import MorningTea from '../../components/morningTeaGenerateReport';
+import EveningTea from '../../components/eveningTea';
+import MorningTea from '../../components/morningTea';
 import Profile from '../../components/profile';
 import Lunch from '../../components/Lunch';
 import {colors} from '../../constants/constants';
@@ -16,7 +16,17 @@ const Stack = createNativeStackNavigator();
 function SplashScreen({navigation}) {
   setTimeout(() => {
     navigation.replace('dashBoard');
-  }, 2000);
+  }, 4000);
+
+  useEffect(() => {
+    CheckToken();
+  }, []);
+
+  async function CheckToken() {
+    const Data = await AsyncStorage.getItem('token');
+    console.log('This is Token', Data);
+  }
+
   return (
     <View
       flex={1}
@@ -140,6 +150,10 @@ export default function AppNavigation() {
           headerStyle: {
             backgroundColor: colors.main,
           },
+          headerTitleStyle: {
+            color: colors.lightGrey,
+          },
+          headerTintColor: colors.lightGrey,
           title: 'Launch',
           headerTitleAlign: 'center',
           headerShown: true,

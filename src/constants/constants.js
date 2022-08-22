@@ -7,6 +7,7 @@ export const colors = {
   black: '#444444',
   disabledGrey: 'grey',
 };
+// export const morningTeaStart = 10 * 60 + 0;
 export const morningTeaStart = 11 * 60 + 0;
 export const morningTeaEnd = 24 * 60 + 0;
 export const lunchStart = 13 * 60 + 0;

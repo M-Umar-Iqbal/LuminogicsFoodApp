@@ -1,5 +1,5 @@
+import React, {useEffect, useContext, useState} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   Alert,
@@ -9,13 +9,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Avatar} from 'react-native-paper';
-import React, {useEffect, useState} from 'react';
 import Card from '../commons/itemCards';
 import getStyles from './style';
 import {useBackHandler} from '@react-native-community/hooks';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import {
   colors,
   morningTeaStart,
@@ -26,29 +24,32 @@ import {
   lunchEnd,
 } from '../../constants/constants';
 import CheckInternet from '../../components/commons/checkInternet/index.js';
+import {AuthContext} from '../../providers/provider';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
 export default function Dashboard({navigation}) {
+  const [token, setToken] = useState();
+  const [refreshing, setRefreshing] = useState(false);
+  const styles = getStyles();
+
   useEffect(() => {
     getAll();
   }, []);
-  const [token, setToken] = useState();
+
   async function getAll() {
     const token = await AsyncStorage.getItem('token');
     setToken(token);
   }
-  const styles = getStyles();
+
   function inTime(start, end) {
     var now = new Date();
     var time = now.getHours() * 60 + now.getMinutes();
     time;
     return time >= start && time < end;
   }
-
-  const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -90,14 +91,8 @@ export default function Dashboard({navigation}) {
             alignItems: 'center',
           }}>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-            {/* <MaterialIcons
-              name={'account-circle'}
-              size={30}
-              color={colors.darkGrey}
-            /> */}
-
             <Avatar.Image
-              size={40}
+              size={35}
               source={require('../../assets/images/avatar.png')}
             />
           </TouchableOpacity>
@@ -105,7 +100,6 @@ export default function Dashboard({navigation}) {
         <View
           style={{
             width: '65%',
-
             justifyContent: 'center',
           }}>
           <Text
@@ -122,7 +116,6 @@ export default function Dashboard({navigation}) {
         <View
           style={{
             width: '15%',
-            // backgroundColor: 'blue',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
@@ -148,7 +141,7 @@ export default function Dashboard({navigation}) {
             img="coffee"
             color="#9ED2C6"
             onPress={() => navigation.navigate('MorningTea')}
-            helperText="Enable's after 11:00 AM "
+            helperText="The report can be generated after 11:00 AM"
             disabled={inTime(morningTeaStart, morningTeaEnd) ? false : true}
           />
           <Card
@@ -156,15 +149,16 @@ export default function Dashboard({navigation}) {
             img="hamburger"
             color="#D36B00"
             onPress={() => navigation.navigate('Lunch')}
-            helperText="Enable's after 01:00 PM"
+            helperText="The report can be generated after 01:00 PM"
             disabled={inTime(lunchStart, lunchEnd) ? false : true}
           />
+
           <Card
             Title="Evening Tea"
             img="coffee"
             color="#FEC260"
             onPress={() => navigation.navigate('EveningTea')}
-            helperText="Enables after 05:00 PM"
+            helperText="The report can be generated after 05:00 PM"
             disabled={inTime(eveningTeaStart, eveningTeaEnd) ? false : true}
           />
         </View>

@@ -18,11 +18,16 @@ export default function LunchCard({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <FontAwesome5 name={'user-circle'} size={35} color={complete} />
+        {/* <FontAwesome5 name={'user-circle'} size={35} color={complete} /> */}
         <Text
           style={[
             styles.title,
-            {textTransform: 'uppercase', color: complete, fontSize: 20},
+            {
+              textTransform: 'uppercase',
+              color: complete,
+              fontSize: 17,
+              marginLeft: 5,
+            },
           ]}>
           {Name}
         </Text>
@@ -58,10 +63,10 @@ export default function LunchCard({
           style={[
             styles.description,
             {
-              borderTopWidth: 1,
+              borderTopWidth: 3,
               borderTopColor: 'white',
               marginTop: 10,
-              paddingTop: 20,
+              paddingTop: 7,
               fontSize: 15,
               fontWeight: '500',
               lineHeight: 20,

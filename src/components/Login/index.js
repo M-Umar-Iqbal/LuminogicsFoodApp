@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from 'react-native';
+import {TextInput} from 'react-native-paper';
 import React, {useEffect, useState} from 'react';
 import {colors} from '../../constants/constants';
 import URL from '../../constants/constants';
@@ -185,6 +186,7 @@ export default function Home({navigation}) {
                   <ActivityIndicator size={20} color="#ffffff" />
                 )}
               </TouchableOpacity> */}
+
               <Button
                 style={styles.customButtonContainer}
                 icon="login"
