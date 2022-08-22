@@ -14,6 +14,21 @@ export default function orderDetail({
   fullCups = null,
   halfCups = null,
 }) {
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
   const styles = getStyles();
   const [flex, setFlex] = useState(3);
   useEffect(() => {
@@ -47,12 +62,12 @@ export default function orderDetail({
           <Fontisto name={'date'} size={30} color={colors.main} />
           <Text style={[styles.subHeading, {fontSize: 25, marginLeft: 20}]}>
             {date
-              ? date
-              : today.getDate() +
-                '/' +
-                (today.getMonth() + 1) +
-                '/' +
-                today.getFullYear()}
+              ? today.getDate() +
+                '-' +
+                monthNames[today.getMonth()] +
+                '-' +
+                today.getFullYear()
+              : date}
           </Text>
         </View>
         <Divider style={{marginTop: 20, marginBottom: 20}} leadingInset={0} />

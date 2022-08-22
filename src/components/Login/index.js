@@ -83,6 +83,7 @@ export default function Home({navigation}) {
     if (passwordValidation && emailValidation) {
       setLoader(true);
       axios
+
         .post(`${URL}/api/users/log-in`, admin)
         .then(function (response) {
           const Token = response?.data?.payload?.data?.token;
@@ -91,7 +92,6 @@ export default function Home({navigation}) {
           storeData(Token, userName, Email);
           ToastAndroid.show(response.data.metadata.message, ToastAndroid.SHORT);
           setTimeout(() => {
-            console.log('console', response?.data?.metadata?.responseCode);
             response?.data?.metadata?.responseCode === 200
               ? navigation.navigate('dashBoard')
               : ToastAndroid.show('Error Occurred', ToastAndroid.SHORT);
@@ -100,7 +100,7 @@ export default function Home({navigation}) {
         })
         .catch(function (error) {
           setLoader(false);
-          ToastAndroid.show('Something Went Wrong', ToastAndroid.SHORT);
+
           error.response.data.metadata.message == 400 ? (
             ToastAndroid.show('Error Occurred', ToastAndroid.SHORT)
           ) : (

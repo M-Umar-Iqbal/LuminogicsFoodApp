@@ -11,7 +11,6 @@ const Navigation = () => {
   const Token = useSelector(state => {
     return state.AddToken.token;
   });
-  console.log('This in navigation .index file', Token);
 
   useEffect(() => {
     getAll();

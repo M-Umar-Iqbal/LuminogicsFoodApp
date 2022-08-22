@@ -27,7 +27,6 @@ function SplashScreen({navigation}) {
   async function CheckToken() {
     const Data = await AsyncStorage.getItem('token');
     dispatch(AddToken(Data));
-    console.log('This is Main Navigation File', Data);
   }
 
   return (

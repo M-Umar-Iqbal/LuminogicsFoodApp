@@ -29,7 +29,7 @@ function SplashScreen({navigation}) {
 
   async function CheckToken() {
     const Data = await AsyncStorage.getItem('token');
-    console.log('This is Auth Navigation', Data);
+
     dispatch(AddToken(Data));
   }
   return (
