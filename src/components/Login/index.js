@@ -34,9 +34,7 @@ export default function Home({navigation}) {
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('userName', name);
       await AsyncStorage.setItem('email', email);
-    } catch (e) {
-      'Error', e;
-    }
+    } catch (e) {}
   };
 
   const admin = {
