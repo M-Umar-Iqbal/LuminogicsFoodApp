@@ -3,13 +3,13 @@ import {colors} from '../../constants/constants';
 
 const getStyles = () =>
   StyleSheet.create({
-    container: {
-      paddingTop: 40,
-      flex: 1,
-      justifyContent: 'space-evenly',
+    mainContainer: {
+      marginTop: 20,
+
       flexDirection: 'row',
       flexWrap: 'wrap',
-      // backgroundColor: 'grey',
+      width: '100%',
+      justifyContent: 'space-between',
     },
   });
 export default getStyles;

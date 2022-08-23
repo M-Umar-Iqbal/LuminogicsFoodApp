@@ -10,8 +10,12 @@ import {useBackHandler} from '@react-native-community/hooks';
 import {colors} from '../../constants/constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {AddToken} from '../../redux/actions/action';
 
 export default function Profile({navigation}) {
+  const dispatch = useDispatch();
+
   function confirmExit() {
     navigation.goBack();
     return true;
@@ -67,8 +71,9 @@ export default function Profile({navigation}) {
           style={styles.customButtonContainer}
           onPress={() => {
             setLoader(true);
+            dispatch(AddToken('null'));
             storeData('null');
-            token ? navigation.navigate('login') : navigation.popToTop();
+            token ? navigation.navigate('login') : navigation.navigate('login');
           }}>
           {!loader ? (
             <Text style={styles.customButtonTitle}>Logout</Text>

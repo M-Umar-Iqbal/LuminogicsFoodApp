@@ -14,6 +14,8 @@ import getStyles from './style';
 import {useBackHandler} from '@react-native-community/hooks';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+
 import {
   colors,
   morningTeaStart,
@@ -24,12 +26,15 @@ import {
   lunchEnd,
 } from '../../constants/constants';
 import CheckInternet from '../../components/commons/checkInternet/index.js';
+import {AddToken} from '../../redux/actions/action';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
 export default function Dashboard({navigation}) {
+  const dispatch = useDispatch();
+
   const [token, setToken] = useState();
   const [refreshing, setRefreshing] = useState(false);
   const styles = getStyles();
@@ -118,48 +123,60 @@ export default function Dashboard({navigation}) {
           }}>
           <TouchableOpacity
             onPress={() => {
+              dispatch(AddToken('null'));
               storeData('null');
-              token ? navigation.navigate('login') : navigation.popToTop();
+              token
+                ? navigation.navigate('login')
+                : navigation.navigate('login');
             }}>
             <MaterialIcons name={'logout'} size={30} color={colors.main} />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView
-        style={{backgroundColor: colors.main, flex: 1}}
-        contentContainerStyle={styles.scrollView}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <CheckInternet />
-        <View style={styles.container}>
-          <Card
-            Title="Morning Tea"
-            img="coffee"
-            color="#9ED2C6"
-            onPress={() => navigation.navigate('MorningTea')}
-            helperText="The report can be generated after 11:00 AM"
-            disabled={checkTime(morningTeaStart, morningTeaEnd) ? false : true}
-          />
-          <Card
-            Title="Lunch"
-            img="hamburger"
-            color="#D36B00"
-            onPress={() => navigation.navigate('Lunch')}
-            helperText="The report can be generated after 01:00 PM"
-            disabled={checkTime(lunchStart, lunchEnd) ? false : true}
-          />
+      <View style={{backgroundColor: colors.main, flex: 1}}>
+        <ScrollView
+          style={{
+            marginLeft: 16,
+            marginRight: 16,
+          }}
+          contentContainerStyle={styles.scrollView}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
+          <CheckInternet />
+          <View style={styles.mainContainer} flex={1}>
+            <Card
+              Title="Morning Tea"
+              img="coffee"
+              color="#9ED2C6"
+              onPress={() => navigation.navigate('MorningTea')}
+              helperText="The report can be generated after 11:00 AM"
+              disabled={
+                checkTime(morningTeaStart, morningTeaEnd) ? false : true
+              }
+            />
+            <Card
+              Title="Lunch"
+              img="hamburger"
+              color="#D36B00"
+              onPress={() => navigation.navigate('Lunch')}
+              helperText="The report can be generated after 01:00 PM"
+              disabled={checkTime(lunchStart, lunchEnd) ? false : true}
+            />
 
-          <Card
-            Title="Evening Tea"
-            img="coffee"
-            color="#FEC260"
-            onPress={() => navigation.navigate('EveningTea')}
-            helperText="The report can be generated after 05:00 PM"
-            disabled={checkTime(eveningTeaStart, eveningTeaEnd) ? false : true}
-          />
-        </View>
-      </ScrollView>
+            <Card
+              Title="Evening Tea"
+              img="coffee"
+              color="#FEC260"
+              onPress={() => navigation.navigate('EveningTea')}
+              helperText="The report can be generated after 05:00 PM"
+              disabled={
+                checkTime(eveningTeaStart, eveningTeaEnd) ? false : true
+              }
+            />
+          </View>
+        </ScrollView>
+      </View>
     </>
   );
 }
