@@ -23,6 +23,7 @@ const getStyles = () =>
       padding: 20,
       width: '49%',
       marginBottom: 9,
+
       justifyContent: 'center',
       alignItems: 'center',
 

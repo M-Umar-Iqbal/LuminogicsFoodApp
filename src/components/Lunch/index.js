@@ -69,7 +69,7 @@ export default function Lunch({navigation: {goBack}}) {
         total={totalRoti}
       />
       {Data.length !== 0 ? (
-        <View flex={7.5} style={{marginLeft: 16, marginRight: 16}}>
+        <View flex={8} style={{marginLeft: 16, marginRight: 16}}>
           <ScrollView>
             {Data.map((e, index) => (
               <LunchCard
@@ -83,7 +83,7 @@ export default function Lunch({navigation: {goBack}}) {
           </ScrollView>
         </View>
       ) : (
-        <View flex={7.5}>
+        <View flex={8}>
           <LoadingIndicator title={checkData === null ? true : false} />
         </View>
       )}

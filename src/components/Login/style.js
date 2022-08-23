@@ -41,15 +41,10 @@ const styles = () =>
 
     customButtonContainer: {
       marginTop: 5,
-      elevation: 20,
+      elevation: 10,
       borderRadius: 12,
     },
-    customButtonTitle: {
-      fontSize: 15,
-      color: 'white',
-      fontWeight: '400',
-      textTransform: 'capitalize',
-    },
+
     gap: {
       marginTop: 7,
       marginBottom: 7,

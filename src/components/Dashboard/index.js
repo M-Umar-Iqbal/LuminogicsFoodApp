@@ -61,7 +61,7 @@ export default function Dashboard({navigation}) {
 
   const storeData = async value => {
     try {
-      await AsyncStorage.setItem('token', value);
+      await AsyncStorage.removeItem(value);
     } catch (e) {
       //error
     }
@@ -122,12 +122,10 @@ export default function Dashboard({navigation}) {
             alignItems: 'center',
           }}>
           <TouchableOpacity
-            onPress={() => {
+            onPressIn={() => {
               dispatch(AddToken('null'));
-              storeData('null');
-              token
-                ? navigation.navigate('login')
-                : navigation.navigate('login');
+              storeData('token');
+              navigation.navigate('login');
             }}>
             <MaterialIcons name={'logout'} size={30} color={colors.main} />
           </TouchableOpacity>

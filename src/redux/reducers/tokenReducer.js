@@ -1,6 +1,6 @@
 import {ADD_USER_TOKEN} from '../constants';
 const initialState = {
-  token: '',
+  token: null,
 };
 export default function AddToken(state = initialState, action) {
   switch (action.type) {

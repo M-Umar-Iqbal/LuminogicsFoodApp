@@ -40,18 +40,18 @@ function Card({
             textAlign: 'center',
             fontWeight: '700',
             fontSize: 20,
-            color: '#000000',
+            color: colorBlack,
           }}>
           {Title}
         </Text>
-        <Text style={{textAlign: 'center', color: '#000000'}}>
+        <Text style={{textAlign: 'center', color: colorBlack}}>
           {helperText}
         </Text>
       </View>
       <TouchableOpacity onPress={onPress} disabled={disabled}>
         <View
           style={{
-            backgroundColor: colors.black,
+            backgroundColor: colorDarkGrey,
             borderRadius: 20,
             marginTop: 20,
             padding: 10,

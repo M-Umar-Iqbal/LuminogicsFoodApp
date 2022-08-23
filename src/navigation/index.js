@@ -17,7 +17,7 @@ const Navigation = () => {
   }, [Token]);
 
   function getAll() {
-    Token !== 'null' ? setLoggedIn(true) : setLoggedIn(false);
+    Token !== null ? setLoggedIn(true) : setLoggedIn(false);
   }
 
   return <>{!loggedIn ? <AuthNavigator /> : <AppNavigator />}</>;

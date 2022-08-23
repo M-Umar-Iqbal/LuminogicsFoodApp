@@ -73,7 +73,7 @@ const TeaGenerateReport = ({navigation, API, title}) => {
         fullCups={fullCup}
         halfCups={halfCup}
       />
-      <View flex={7.5}>
+      <View flex={7}>
         {Data.length !== 0 ? (
           <FlatDataList Data={Data} />
         ) : (

@@ -30,7 +30,7 @@ export default function orderDetail({
   ];
 
   const styles = getStyles();
-  const [flex, setFlex] = useState(3);
+  const [flex, setFlex] = useState(2);
   useEffect(() => {
     item === 'Roti' ? setFlex(2) : setFlex(3);
   }, []);

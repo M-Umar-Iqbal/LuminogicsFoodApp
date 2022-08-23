@@ -40,7 +40,7 @@ export default function Profile({navigation}) {
 
   const storeData = async value => {
     try {
-      await AsyncStorage.setItem('token', value);
+      await AsyncStorage.removeItem(value);
     } catch (e) {
       //error
     }
@@ -67,20 +67,20 @@ export default function Profile({navigation}) {
         </Text>
       </View>
       <View flex={5} style={{alignItems: 'center'}}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.customButtonContainer}
           onPress={() => {
             setLoader(true);
             dispatch(AddToken('null'));
-            storeData('null');
-            token ? navigation.navigate('login') : navigation.navigate('login');
+            storeData('token');
+            navigation.navigate('login');
           }}>
           {!loader ? (
             <Text style={styles.customButtonTitle}>Logout</Text>
           ) : (
             <ActivityIndicator size={20} color="#ffffff" />
           )}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
