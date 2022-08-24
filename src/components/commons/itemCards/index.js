@@ -14,13 +14,13 @@ function Card({
   helperText = 'Helper Text Not Available',
   disabled = false,
 }) {
-  let colorDarkGrey = colors.darkGrey;
+  let colorLightGrey = colors.royalBlue;
   let colorBlack = colors.black;
   const styles = getStyles();
   {
     disabled
       ? ((color = colors.lightGrey),
-        (colorDarkGrey = colors.disabledGrey),
+        (colorLightGrey = colors.disabledGrey),
         (colorBlack = colors.disabledGrey))
       : color;
   }
@@ -51,12 +51,16 @@ function Card({
       <TouchableOpacity onPress={onPress} disabled={disabled}>
         <View
           style={{
-            backgroundColor: colorDarkGrey,
-            borderRadius: 20,
+            backgroundColor: colorLightGrey,
+            borderRadius: 10,
             marginTop: 20,
-            padding: 10,
+            padding: 7,
           }}>
-          <Entypo name="chevron-thin-right" size={25} color={color} />
+          <Entypo
+            name="chevron-thin-right"
+            size={25}
+            color={colors.lightGrey}
+          />
         </View>
       </TouchableOpacity>
     </View>

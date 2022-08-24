@@ -33,7 +33,7 @@ const styles = () =>
 
     loginText: {
       marginBottom: 10,
-      color: colors.black,
+      color: colors.main,
       fontSize: 30,
       fontWeight: '800',
       // fontFamily: 'Helvetica',
@@ -41,7 +41,7 @@ const styles = () =>
 
     customButtonContainer: {
       marginTop: 5,
-      elevation: 10,
+      elevation: 5,
       borderRadius: 12,
     },
 

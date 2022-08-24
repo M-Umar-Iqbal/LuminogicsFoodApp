@@ -29,12 +29,15 @@ export default function Home({navigation}) {
   const [password, setPassword] = useState('');
   const [loader, setLoader] = useState(false);
 
-  const storeData = async (token, name, email) => {
+  const storeData = async (token, name, email, image) => {
     try {
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('userName', name);
       await AsyncStorage.setItem('email', email);
-    } catch (e) {}
+      await AsyncStorage.setItem('userImage', image);
+    } catch (e) {
+      //error
+    }
   };
 
   const admin = {
@@ -87,7 +90,9 @@ export default function Home({navigation}) {
           const Token = response?.data?.payload?.data?.token;
           const userName = response?.data?.payload?.data?.user?.userName;
           const Email = response?.data?.payload?.data?.user?.email;
-          storeData(Token, userName, Email);
+          const Image = response?.data?.payload?.data?.user?.employeeImage;
+
+          storeData(Token, userName, Email, Image);
           ToastAndroid.show(response.data.metadata.message, ToastAndroid.SHORT);
           setTimeout(() => {
             response?.data?.metadata?.responseCode === 200
@@ -124,7 +129,7 @@ export default function Home({navigation}) {
             style={{width: 110, height: 110}}
             source={require('../../assets/images/hamburger.png')}
           />
-          <Text style={styles.logoText}>Lumeal</Text>
+          <Text style={styles.logoText}>LuMeal</Text>
         </View>
 
         <View style={styles.mainInputFieldsContainer}>

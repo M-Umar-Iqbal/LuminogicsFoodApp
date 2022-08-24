@@ -30,27 +30,14 @@ export default function orderDetail({
   ];
 
   const styles = getStyles();
-  const [flex, setFlex] = useState(2);
-  useEffect(() => {
-    item === 'Roti' ? setFlex(2) : setFlex(3);
-  }, []);
 
   return (
-    <View flex={flex}>
-      {/* <View style={styles.detailContainer}>
-        <View style={{alignItems: 'center', padding: 15}}>
-          <Text style={styles.mainHeading}>{title}</Text>
-        </View>
-        <View style={{padding: 2, alignItems: 'center'}}>
-          <Text style={styles.subHeading}>{date ? date : 'Loading ...'}</Text>
-        </View>
-      </View> */}
-
+    <View flex={1}>
       <View
         style={{
           padding: 25,
           backgroundColor: colors.lightGrey,
-          elevation: 10,
+          elevation: 5,
         }}>
         <View
           style={{

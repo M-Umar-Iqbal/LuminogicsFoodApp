@@ -4,18 +4,15 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useBackHandler} from '@react-native-community/hooks';
 import {colors} from '../../constants/constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
-import {AddToken} from '../../redux/actions/action';
 
 export default function Profile({navigation}) {
-  const dispatch = useDispatch();
-
   function confirmExit() {
     navigation.goBack();
     return true;
@@ -23,6 +20,8 @@ export default function Profile({navigation}) {
   const [token, setToken] = useState();
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
   useEffect(() => {
     getData();
   }, []);
@@ -33,18 +32,13 @@ export default function Profile({navigation}) {
     setUserName(userName);
     const email = await AsyncStorage.getItem('email');
     setEmail(email);
+    const image = await AsyncStorage.getItem('userImage');
+    console.log(image);
+    setImageUrl(image);
   }
-  const [loader, setLoader] = useState(false);
 
   useBackHandler(confirmExit);
 
-  const storeData = async value => {
-    try {
-      await AsyncStorage.removeItem(value);
-    } catch (e) {
-      //error
-    }
-  };
   return (
     <View flex={1} style={{backgroundColor: colors.white}}>
       <View
@@ -54,11 +48,21 @@ export default function Profile({navigation}) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <MaterialIcons
-          name={'account-circle'}
-          size={200}
-          color={colors.black}
-        />
+        {imageUrl ? (
+          <Image
+            style={{height: 230, width: 230, borderRadius: 230 / 2}}
+            source={{
+              uri: imageUrl,
+            }}
+          />
+        ) : (
+          <MaterialIcons
+            name={'account-circle'}
+            size={200}
+            color={colors.black}
+          />
+        )}
+
         <Text style={{fontSize: 35, fontWeight: '600', color: colors.black}}>
           {userName}
         </Text>

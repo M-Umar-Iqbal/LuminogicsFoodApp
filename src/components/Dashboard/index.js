@@ -95,6 +95,7 @@ export default function Dashboard({navigation}) {
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <Avatar.Image
               size={35}
+              backgroundColor={colors.royalBlue}
               source={require('../../assets/images/avatar.png')}
             />
           </TouchableOpacity>
@@ -127,7 +128,7 @@ export default function Dashboard({navigation}) {
               storeData('token');
               navigation.navigate('login');
             }}>
-            <MaterialIcons name={'logout'} size={30} color={colors.main} />
+            <MaterialIcons name={'logout'} size={30} color={colors.royalBlue} />
           </TouchableOpacity>
         </View>
       </View>

@@ -20,16 +20,14 @@ const getStyles = () =>
     // },
 
     cardContainer: {
-      padding: 20,
+      padding: 15,
       width: '49%',
       marginBottom: 9,
-
       justifyContent: 'center',
       alignItems: 'center',
-
       backgroundColor: '#ffffff',
       justifyContent: 'space-between',
-      borderRadius: 30,
+      borderRadius: 10,
     },
   });
 export default getStyles;
