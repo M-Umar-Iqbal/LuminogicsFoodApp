@@ -57,7 +57,7 @@ export default function orderDetail({
               : date}
           </Text>
         </View>
-        <Divider style={{marginTop: 20, marginBottom: 20}} leadingInset={0} />
+        <Divider style={{marginTop: 12, marginBottom: 20}} leadingInset={0} />
         {item !== 'Roti' ? (
           <View>
             <Text
@@ -75,7 +75,11 @@ export default function orderDetail({
           </View>
         ) : null}
 
-        <Text style={[styles.subHeading, {color: colors.black, fontSize: 12}]}>
+        <Text
+          style={[
+            styles.subHeading,
+            {color: colors.black, fontSize: 16, fontWeight: 'bold'},
+          ]}>
           Total {item} : {total}
         </Text>
       </View>

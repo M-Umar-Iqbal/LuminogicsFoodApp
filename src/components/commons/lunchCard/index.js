@@ -88,7 +88,7 @@ export default function LunchCard({
               borderTopColor: 'white',
               color: 'black',
               marginTop: 10,
-              paddingTop: 10,
+              paddingTop: 7,
               fontSize: 15,
               fontWeight: '700',
               lineHeight: 20,

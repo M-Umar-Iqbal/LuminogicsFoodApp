@@ -10,6 +10,7 @@ const getStyles = () =>
     },
     description: {
       color: colors.black,
+      fontSize: 16,
       paddingBottom: 10,
     },
     container: {
@@ -20,7 +21,6 @@ const getStyles = () =>
       borderTopRightRadius: 30,
       borderBottomRightRadius: 30,
       borderTopLeftRadius: 20,
-
       overflow: 'hidden',
       elevation: 5,
     },
