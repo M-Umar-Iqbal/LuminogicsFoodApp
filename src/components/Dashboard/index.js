@@ -7,12 +7,13 @@ import {
   ScrollView,
   RefreshControl,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import {Avatar} from 'react-native-paper';
 import Card from '../commons/itemCards';
 import getStyles from './style';
 import {useBackHandler} from '@react-native-community/hooks';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 
@@ -69,7 +70,7 @@ export default function Dashboard({navigation}) {
 
   // BackHandler.exitApp()
   function confirmExit() {
-    Alert.alert('', 'Do you want to exit?', [
+    Alert.alert('', 'Do you want to close the app?', [
       {text: 'No', onPress: () => null, style: 'cancel'},
       {text: 'Yes', onPress: () => BackHandler.exitApp()},
     ]);
@@ -130,7 +131,11 @@ export default function Dashboard({navigation}) {
 
               navigation.navigate('login');
             }}>
-            <MaterialIcons name={'logout'} size={30} color={colors.royalBlue} />
+            <MaterialIcons
+              name={'log-out-outline'}
+              size={35}
+              color={colors.royalBlue}
+            />
           </TouchableOpacity>
         </View>
       </View>

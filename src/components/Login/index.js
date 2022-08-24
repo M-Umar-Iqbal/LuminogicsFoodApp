@@ -131,11 +131,11 @@ export default function Home({navigation}) {
           />
           <Text style={styles.logoText}>LuMeal</Text>
         </View>
-
         <View style={styles.mainInputFieldsContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.loginText}>Login</Text>
-
+            <View style={styles.gap}>
+              <Text style={styles.loginText}>Sign in</Text>
+            </View>
             <InputField
               placeholder="Email"
               color={emailErrorColor}
@@ -170,7 +170,7 @@ export default function Home({navigation}) {
               onPress={checkValidation}
               loading={loader}
               contentStyle={{height: 60}}>
-              Login
+              Sign in
             </Button>
           </View>
         </View>

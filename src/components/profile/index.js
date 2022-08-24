@@ -33,7 +33,7 @@ export default function Profile({navigation}) {
     const email = await AsyncStorage.getItem('email');
     setEmail(email);
     const image = await AsyncStorage.getItem('userImage');
-    console.log(image);
+
     setImageUrl(image);
   }
 
@@ -63,12 +63,19 @@ export default function Profile({navigation}) {
           />
         )}
 
-        <Text style={{fontSize: 35, fontWeight: '600', color: colors.black}}>
-          {userName}
-        </Text>
-        <Text style={{fontSize: 20, fontWeight: '400', color: colors.black}}>
-          {email}
-        </Text>
+        <View
+          style={{
+            marginTop: 30,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text style={{fontSize: 35, fontWeight: '700', color: colors.black}}>
+            {userName}
+          </Text>
+          <Text style={{fontSize: 20, fontWeight: '400', color: colors.black}}>
+            {email}
+          </Text>
+        </View>
       </View>
       <View flex={5} style={{alignItems: 'center'}}>
         {/* <TouchableOpacity
