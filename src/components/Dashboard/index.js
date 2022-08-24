@@ -126,6 +126,8 @@ export default function Dashboard({navigation}) {
             onPressIn={() => {
               dispatch(AddToken('null'));
               storeData('token');
+              storeData('userImage');
+
               navigation.navigate('login');
             }}>
             <MaterialIcons name={'logout'} size={30} color={colors.royalBlue} />
