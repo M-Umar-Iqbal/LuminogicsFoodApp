@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useBackHandler} from '@react-native-community/hooks';
@@ -19,6 +20,8 @@ export default function Profile({navigation}) {
   const [token, setToken] = useState();
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
   useEffect(() => {
     getData();
   }, []);
@@ -29,18 +32,12 @@ export default function Profile({navigation}) {
     setUserName(userName);
     const email = await AsyncStorage.getItem('email');
     setEmail(email);
-  }
-  const [loader, setLoader] = useState(false);
+    const image = await AsyncStorage.getItem('userImage');
 
+    setImageUrl(image);
+  }
   useBackHandler(confirmExit);
 
-  const storeData = async value => {
-    try {
-      await AsyncStorage.setItem('token', value);
-    } catch (e) {
-      //error
-    }
-  };
   return (
     <View flex={1} style={{backgroundColor: colors.white}}>
       <View
@@ -50,32 +47,50 @@ export default function Profile({navigation}) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <MaterialIcons
-          name={'account-circle'}
-          size={200}
-          color={colors.black}
-        />
-        <Text style={{fontSize: 35, fontWeight: '600', color: colors.black}}>
-          {userName}
-        </Text>
-        <Text style={{fontSize: 20, fontWeight: '400', color: colors.black}}>
-          {email}
-        </Text>
+        {imageUrl ? (
+          <Image
+            style={{height: 230, width: 230, borderRadius: 230 / 2}}
+            source={{
+              uri: imageUrl,
+            }}
+          />
+        ) : (
+          <MaterialIcons
+            name={'account-circle'}
+            size={200}
+            color={colors.black}
+          />
+        )}
+
+        <View
+          style={{
+            marginTop: 30,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text style={{fontSize: 35, fontWeight: '700', color: colors.black}}>
+            {userName}
+          </Text>
+          <Text style={{fontSize: 20, fontWeight: '400', color: colors.black}}>
+            {email}
+          </Text>
+        </View>
       </View>
       <View flex={5} style={{alignItems: 'center'}}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.customButtonContainer}
           onPress={() => {
             setLoader(true);
-            storeData('null');
-            token ? navigation.navigate('login') : navigation.popToTop();
+            dispatch(AddToken('null'));
+            storeData('token');
+            navigation.navigate('login');
           }}>
           {!loader ? (
             <Text style={styles.customButtonTitle}>Logout</Text>
           ) : (
             <ActivityIndicator size={20} color="#ffffff" />
           )}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

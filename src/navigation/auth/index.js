@@ -29,7 +29,6 @@ function SplashScreen({navigation}) {
 
   async function CheckToken() {
     const Data = await AsyncStorage.getItem('token');
-
     dispatch(AddToken(Data));
   }
   return (
@@ -44,7 +43,7 @@ function SplashScreen({navigation}) {
         style={{width: 100, height: 100}}
         source={require('../../assets/images/hamburger.png')}
       />
-      <Text style={styles.logoText}>Lumeal</Text>
+      <Text style={styles.logoText}>LuMeal</Text>
     </View>
   );
 }

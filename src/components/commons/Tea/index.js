@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, RefreshControl} from 'react-native';
 import {useBackHandler} from '@react-native-community/hooks';
 import OrderDetail from '../orderDetails';
 import FlatDataList from '../flatList';
@@ -14,6 +14,8 @@ const TeaGenerateReport = ({navigation, API, title}) => {
   const [fullCup, setFullCup] = useState(0);
   const [checkData, setCheckData] = useState();
   const [Data, setData] = useState([]);
+  const [refreshing, setRefreshing] = React.useState(false);
+
   function confirmExit() {
     navigation();
     return true;
@@ -22,7 +24,7 @@ const TeaGenerateReport = ({navigation, API, title}) => {
 
   useEffect(() => {
     getAll();
-  }, refreshing);
+  }, [refreshing]);
 
   const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -31,8 +33,6 @@ const TeaGenerateReport = ({navigation, API, title}) => {
     setRefreshing(true);
     wait(100).then(() => setRefreshing(false));
   }, []);
-
-  const [refreshing, setRefreshing] = React.useState(false);
 
   async function getAll() {
     const token = await AsyncStorage.getItem('token');
@@ -58,22 +58,24 @@ const TeaGenerateReport = ({navigation, API, title}) => {
   }
 
   return (
-    <View flex={1} style={{backgroundColor: '#ffffff'}}>
-      <OrderDetail
-        title={title}
-        date={
-          today.getDate() +
-          '/' +
-          (today.getMonth() + 1) +
-          '/' +
-          today.getFullYear()
-        }
-        item="Cups"
-        total={totalCup}
-        fullCups={fullCup}
-        halfCups={halfCup}
-      />
-      <View flex={7.5}>
+    <View flex={1}>
+      <View flex={3}>
+        <OrderDetail
+          title={title}
+          date={
+            today.getDate() +
+            '/' +
+            (today.getMonth() + 1) +
+            '/' +
+            today.getFullYear()
+          }
+          item="Cups"
+          total={totalCup}
+          fullCups={fullCup}
+          halfCups={halfCup}
+        />
+      </View>
+      <View flex={7}>
         {Data.length !== 0 ? (
           <FlatDataList Data={Data} />
         ) : (

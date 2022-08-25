@@ -30,27 +30,14 @@ export default function orderDetail({
   ];
 
   const styles = getStyles();
-  const [flex, setFlex] = useState(3);
-  useEffect(() => {
-    item === 'Roti' ? setFlex(2) : setFlex(3);
-  }, []);
 
   return (
-    <View flex={flex}>
-      {/* <View style={styles.detailContainer}>
-        <View style={{alignItems: 'center', padding: 15}}>
-          <Text style={styles.mainHeading}>{title}</Text>
-        </View>
-        <View style={{padding: 2, alignItems: 'center'}}>
-          <Text style={styles.subHeading}>{date ? date : 'Loading ...'}</Text>
-        </View>
-      </View> */}
-
+    <View flex={1}>
       <View
         style={{
           padding: 25,
           backgroundColor: colors.lightGrey,
-          elevation: 10,
+          elevation: 5,
         }}>
         <View
           style={{
@@ -70,7 +57,7 @@ export default function orderDetail({
               : date}
           </Text>
         </View>
-        <Divider style={{marginTop: 20, marginBottom: 20}} leadingInset={0} />
+        <Divider style={{marginTop: 12, marginBottom: 20}} leadingInset={0} />
         {item !== 'Roti' ? (
           <View>
             <Text
@@ -88,7 +75,11 @@ export default function orderDetail({
           </View>
         ) : null}
 
-        <Text style={[styles.subHeading, {color: colors.black, fontSize: 12}]}>
+        <Text
+          style={[
+            styles.subHeading,
+            {color: colors.black, fontSize: 16, fontWeight: 'bold'},
+          ]}>
           Total {item} : {total}
         </Text>
       </View>

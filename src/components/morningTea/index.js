@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {RefreshControl} from 'react-native';
 
 import Tea from '../commons/Tea';
 const TeaGenerateReport = ({navigation: {goBack}}) => {

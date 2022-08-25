@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, ScrollView, RefreshControl} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  RefreshControl,
+  Button,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import getStyles from './style';
 import LunchCard from '../commons/lunchCard';
@@ -21,10 +28,10 @@ export default function Lunch({navigation: {goBack}}) {
     return true;
   }
   useBackHandler(confirmExit);
-
+  const [refreshing, setRefreshing] = useState(false);
   useEffect(() => {
     getAll();
-  }, refreshing);
+  }, [refreshing]);
 
   const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -34,7 +41,6 @@ export default function Lunch({navigation: {goBack}}) {
 
     wait(100).then(() => setRefreshing(false));
   }, []);
-  const [refreshing, setRefreshing] = useState(false);
 
   async function getAll() {
     const token = await AsyncStorage.getItem('token');
@@ -56,21 +62,26 @@ export default function Lunch({navigation: {goBack}}) {
 
   return (
     <View flex={1} style={styles.container}>
-      <OrderDetail
-        title="Launch Requirements"
-        date={
-          today.getDate() +
-          '/' +
-          (today.getMonth() + 1) +
-          '/' +
-          today.getFullYear()
-        }
-        item="Roti"
-        total={totalRoti}
-      />
+      <View flex={2}>
+        <OrderDetail
+          title="Launch Requirements"
+          date={
+            today.getDate() +
+            '/' +
+            (today.getMonth() + 1) +
+            '/' +
+            today.getFullYear()
+          }
+          item="Roti"
+          total={totalRoti}
+        />
+      </View>
       {Data.length !== 0 ? (
-        <View flex={7.5} style={{marginLeft: 16, marginRight: 16}}>
-          <ScrollView>
+        <View flex={8} style={{marginLeft: 16, marginRight: 16}}>
+          <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }>
             {Data.map((e, index) => (
               <LunchCard
                 key={index}
@@ -78,12 +89,13 @@ export default function Lunch({navigation: {goBack}}) {
                 paidAmount={e.amount}
                 totalRoti={e.rotiQuantity}
                 description={e.extras}
+                img={e.employeeImageURL}
               />
             ))}
           </ScrollView>
         </View>
       ) : (
-        <View flex={7.5}>
+        <View flex={8}>
           <LoadingIndicator title={checkData === null ? true : false} />
         </View>
       )}

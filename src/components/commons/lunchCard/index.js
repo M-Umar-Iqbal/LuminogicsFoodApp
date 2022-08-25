@@ -1,45 +1,66 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useState} from 'react';
 import getStyles from './style';
 import CheckBox from '@react-native-community/checkbox';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from 'react-native-vector-icons/EvilIcons';
 import {colors} from '../../../constants/constants';
 
 export default function LunchCard({
-  Name = 'unknown User ',
+  Name = 'unknown User',
   paidAmount = 0,
   totalRoti = 0,
-  description = 'Not Available',
+  description,
+  img,
 }) {
   const styles = getStyles();
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [disable, setDisable] = useState(toggleCheckBox);
-  const [complete, setComplete] = useState('white');
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {/* <FontAwesome5 name={'user-circle'} size={35} color={complete} /> */}
-        <Text
-          style={[
-            styles.title,
-            {
-              textTransform: 'uppercase',
-              color: complete,
-              fontSize: 17,
-              marginLeft: 5,
-            },
-          ]}>
-          {Name}
-        </Text>
-        <CheckBox
-          disabled={disable}
-          value={toggleCheckBox}
-          onValueChange={newValue => {
-            setToggleCheckBox(newValue);
-            setDisable(!toggleCheckBox);
-            setComplete(colors.black);
-          }}
-        />
+        <View flex={2} style={{justifyContent: 'center'}}>
+          {img ? (
+            <Image
+              style={styles.imgStyle}
+              source={{
+                uri: img,
+              }}
+            />
+          ) : (
+            <Image
+              style={styles.imgStyle}
+              source={require('../../../assets/images/dp.png')}
+            />
+          )}
+        </View>
+
+        <View
+          flex={7}
+          style={{
+            justifyContent: 'center',
+            paddingLeft: 10,
+            alignItems: 'flex-start',
+          }}>
+          <Text
+            style={[
+              styles.title,
+              {
+                textTransform: 'capitalize',
+                color: colors.lightGrey,
+                fontSize: 19,
+              },
+            ]}>
+            {Name}
+          </Text>
+        </View>
+        <View flex={1} style={{justifyContent: 'center', alignItems: 'center'}}>
+          <CheckBox
+            value={toggleCheckBox}
+            onValueChange={newValue => {
+              setToggleCheckBox(newValue);
+            }}
+          />
+        </View>
       </View>
       <View style={styles.details}>
         <View
@@ -60,21 +81,22 @@ export default function LunchCard({
           <Text style={{color: colors.black}}> {totalRoti} </Text>
         </View>
 
-        <Text
-          style={{
-            borderTopWidth: 3,
-            borderTopColor: 'white',
-            color: 'black',
-            marginTop: 10,
-
-            paddingTop: 10,
-            fontSize: 15,
-            fontWeight: '500',
-            lineHeight: 20,
-          }}>
-          Description
-        </Text>
-        <Text style={styles.description}>{description}</Text>
+        {description && (
+          <Text
+            style={{
+              borderTopWidth: 3,
+              borderTopColor: 'white',
+              color: 'black',
+              marginTop: 10,
+              paddingTop: 7,
+              fontSize: 15,
+              fontWeight: '700',
+              lineHeight: 20,
+            }}>
+            Description
+          </Text>
+        )}
+        {description && <Text style={styles.description}>{description}</Text>}
       </View>
     </View>
   );

@@ -29,13 +29,14 @@ export default function Home({navigation}) {
   const [password, setPassword] = useState('');
   const [loader, setLoader] = useState(false);
 
-  const storeData = async (token, name, email) => {
+  const storeData = async (token, name, email, image) => {
     try {
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('userName', name);
       await AsyncStorage.setItem('email', email);
+      await AsyncStorage.setItem('userImage', image);
     } catch (e) {
-      'Error', e;
+      //error
     }
   };
 
@@ -89,7 +90,9 @@ export default function Home({navigation}) {
           const Token = response?.data?.payload?.data?.token;
           const userName = response?.data?.payload?.data?.user?.userName;
           const Email = response?.data?.payload?.data?.user?.email;
-          storeData(Token, userName, Email);
+          const Image = response?.data?.payload?.data?.user?.employeeImage;
+
+          storeData(Token, userName, Email, Image);
           ToastAndroid.show(response.data.metadata.message, ToastAndroid.SHORT);
           setTimeout(() => {
             response?.data?.metadata?.responseCode === 200
@@ -123,79 +126,52 @@ export default function Home({navigation}) {
       <ScrollView flex={1} style={{backgroundColor: colors.lightGrey}}>
         <View style={styles.cardText}>
           <Image
-            style={{width: 100, height: 100}}
+            style={{width: 110, height: 110}}
             source={require('../../assets/images/hamburger.png')}
           />
-          <Text style={styles.logoText}>Lumeal</Text>
+          <Text style={styles.logoText}>LuMeal</Text>
         </View>
-        <View style={styles.mainContainer}>
-          <View style={{width: '85%'}}>
-            <Text style={styles.loginText}>Login</Text>
-          </View>
-          <View style={styles.cardContainer}>
+        <View style={styles.mainInputFieldsContainer}>
+          <View style={styles.inputContainer}>
             <View style={styles.gap}>
-              <InputField
-                placeholder="Email"
-                color={emailErrorColor}
-                icon="mail-outline"
-                iconSize={25}
-                setText={setEmail}
-                keyboardType="email"
-                rightIcon={'close'}
-              />
+              <Text style={styles.loginText}>Sign in</Text>
+            </View>
+            <InputField
+              placeholder="Email"
+              color={emailErrorColor}
+              icon="mail-outline"
+              iconSize={25}
+              setText={setEmail}
+              keyboardType="email"
+              rightIcon={'close'}
+            />
+            <View style={styles.gap}>
               <Text style={styles.error}>{emailError}</Text>
             </View>
-
+            <InputField
+              placeholder="Password"
+              color={passwordErrorColor}
+              icon="lock-outline"
+              iconSize={25}
+              Type="password"
+              setText={setPassword}
+              secure={true}
+              rightIcon={'remove-red-eye'}
+            />
             <View style={styles.gap}>
-              <InputField
-                placeholder="Password"
-                color={passwordErrorColor}
-                icon="lock-outline"
-                iconSize={25}
-                Type="password"
-                setText={setPassword}
-                secure={true}
-                rightIcon={'remove-red-eye'}
-              />
               <Text style={styles.error}>{passwordError}</Text>
             </View>
 
-            <View style={styles.container}>
-              {/* <TouchableOpacity
-                style={styles.customButtonContainer}
-                onPress={checkValidation}>
-                {!loader ? (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <Text style={styles.customButtonTitle}>Login</Text>
-                    <MaterialIcons
-                      name="login"
-                      size={15}
-                      solid
-                      color={colors.lightGrey}
-                      style={{marginLeft: 5}}
-                    />
-                  </View>
-                ) : (
-                  <ActivityIndicator size={20} color="#ffffff" />
-                )}
-              </TouchableOpacity> */}
-
-              <Button
-                style={styles.customButtonContainer}
-                icon="login"
-                mode="contained"
-                buttonColor={colors.main}
-                onPress={checkValidation}
-                loading={loader}
-                contentStyle={{height: 60, width: 370}}>
-                Login
-              </Button>
-            </View>
+            <Button
+              style={styles.customButtonContainer}
+              icon="login"
+              mode="contained"
+              buttonColor={colors.main}
+              onPress={checkValidation}
+              loading={loader}
+              contentStyle={{height: 60}}>
+              Sign in
+            </Button>
           </View>
         </View>
       </ScrollView>

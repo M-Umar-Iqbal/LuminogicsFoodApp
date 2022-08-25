@@ -7,13 +7,16 @@ import {
   ScrollView,
   RefreshControl,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import {Avatar} from 'react-native-paper';
 import Card from '../commons/itemCards';
 import getStyles from './style';
 import {useBackHandler} from '@react-native-community/hooks';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+
 import {
   colors,
   morningTeaStart,
@@ -24,12 +27,15 @@ import {
   lunchEnd,
 } from '../../constants/constants';
 import CheckInternet from '../../components/commons/checkInternet/index.js';
+import {AddToken} from '../../redux/actions/action';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
 export default function Dashboard({navigation}) {
+  const dispatch = useDispatch();
+
   const [token, setToken] = useState();
   const [refreshing, setRefreshing] = useState(false);
   const styles = getStyles();
@@ -56,7 +62,7 @@ export default function Dashboard({navigation}) {
 
   const storeData = async value => {
     try {
-      await AsyncStorage.setItem('token', value);
+      await AsyncStorage.removeItem(value);
     } catch (e) {
       //error
     }
@@ -64,7 +70,7 @@ export default function Dashboard({navigation}) {
 
   // BackHandler.exitApp()
   function confirmExit() {
-    Alert.alert('', 'Do you want to exit?', [
+    Alert.alert('', 'Do you want to close the app?', [
       {text: 'No', onPress: () => null, style: 'cancel'},
       {text: 'Yes', onPress: () => BackHandler.exitApp()},
     ]);
@@ -90,6 +96,7 @@ export default function Dashboard({navigation}) {
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <Avatar.Image
               size={35}
+              backgroundColor={colors.royalBlue}
               source={require('../../assets/images/avatar.png')}
             />
           </TouchableOpacity>
@@ -117,49 +124,65 @@ export default function Dashboard({navigation}) {
             alignItems: 'center',
           }}>
           <TouchableOpacity
-            onPress={() => {
-              storeData('null');
-              token ? navigation.navigate('login') : navigation.popToTop();
+            onPressIn={() => {
+              dispatch(AddToken('null'));
+              storeData('token');
+              storeData('userImage');
+
+              navigation.navigate('login');
             }}>
-            <MaterialIcons name={'logout'} size={30} color={colors.main} />
+            <MaterialIcons
+              name={'log-out-outline'}
+              size={35}
+              color={colors.royalBlue}
+            />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView
-        style={{backgroundColor: colors.main, flex: 1}}
-        contentContainerStyle={styles.scrollView}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <CheckInternet />
-        <View style={styles.container}>
-          <Card
-            Title="Morning Tea"
-            img="coffee"
-            color="#9ED2C6"
-            onPress={() => navigation.navigate('MorningTea')}
-            helperText="The report can be generated after 11:00 AM"
-            disabled={checkTime(morningTeaStart, morningTeaEnd) ? false : true}
-          />
-          <Card
-            Title="Lunch"
-            img="hamburger"
-            color="#D36B00"
-            onPress={() => navigation.navigate('Lunch')}
-            helperText="The report can be generated after 01:00 PM"
-            disabled={checkTime(lunchStart, lunchEnd) ? false : true}
-          />
+      <View style={{backgroundColor: colors.main, flex: 1}}>
+        <ScrollView
+          style={{
+            marginLeft: 16,
+            marginRight: 16,
+          }}
+          contentContainerStyle={styles.scrollView}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
+          <CheckInternet />
+          <View style={styles.mainContainer} flex={1}>
+            <Card
+              Title="Morning Tea"
+              img="coffee"
+              color="#9ED2C6"
+              onPress={() => navigation.navigate('MorningTea')}
+              helperText="The report can be generated after 11:00 AM"
+              disabled={
+                checkTime(morningTeaStart, morningTeaEnd) ? false : true
+              }
+            />
+            <Card
+              Title="Lunch"
+              img="hamburger"
+              color="#D36B00"
+              onPress={() => navigation.navigate('Lunch')}
+              helperText="The report can be generated after 01:00 PM"
+              disabled={checkTime(lunchStart, lunchEnd) ? false : true}
+            />
 
-          <Card
-            Title="Evening Tea"
-            img="coffee"
-            color="#FEC260"
-            onPress={() => navigation.navigate('EveningTea')}
-            helperText="The report can be generated after 05:00 PM"
-            disabled={checkTime(eveningTeaStart, eveningTeaEnd) ? false : true}
-          />
-        </View>
-      </ScrollView>
+            <Card
+              Title="Evening Tea"
+              img="coffee"
+              color="#FEC260"
+              onPress={() => navigation.navigate('EveningTea')}
+              helperText="The report can be generated after 05:00 PM"
+              disabled={
+                checkTime(eveningTeaStart, eveningTeaEnd) ? false : true
+              }
+            />
+          </View>
+        </ScrollView>
+      </View>
     </>
   );
 }

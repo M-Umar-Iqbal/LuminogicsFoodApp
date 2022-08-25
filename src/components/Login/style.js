@@ -2,58 +2,52 @@ import {StyleSheet} from 'react-native';
 import {colors} from '../../constants/constants';
 const styles = () =>
   StyleSheet.create({
-    title: {
-      color: 'black',
-      fontSize: 20,
-    },
-    mainContainer: {
-      alignItems: 'center',
-    },
-    container: {
+    cardText: {
+      padding: 10,
       justifyContent: 'center',
       alignItems: 'center',
+      marginTop: 40,
+      marginBottom: 40,
+    },
+
+    mainInputFieldsContainer: {
+      paddingLeft: 16,
+      paddingRight: 16,
+      paddingBottom: 20,
     },
     logoText: {
       marginTop: 5,
       color: colors.main,
       fontSize: 50,
       fontWeight: '900',
-      // fontFamily: 'Helvetica',
     },
+    title: {
+      color: 'black',
+      fontSize: 20,
+    },
+
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
     loginText: {
       marginBottom: 10,
-      color: colors.black,
+      color: colors.main,
       fontSize: 30,
       fontWeight: '800',
       // fontFamily: 'Helvetica',
     },
-    cardText: {
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      marginTop: 50,
-      marginBottom: 50,
-    },
-    cardContainer: {
-      marginLeft: 16,
-      marginRight: 16,
-    },
 
     customButtonContainer: {
       marginTop: 5,
-      justifyContent: 'center',
-      alignItems: 'center',
-      elevation: 20,
+      elevation: 5,
       borderRadius: 12,
     },
-    customButtonTitle: {
-      fontSize: 15,
-      color: 'white',
-      fontWeight: '400',
-      textTransform: 'capitalize',
-    },
+
     gap: {
-      marginTop: 5,
-      marginBottom: 5,
+      marginTop: 7,
+      marginBottom: 7,
     },
     error: {
       color: 'red',

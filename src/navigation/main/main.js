@@ -3,6 +3,8 @@ import {StyleSheet, View, Image, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AddToken} from '../../redux/actions/action';
+import {useSelector} from 'react-redux';
+
 // import login from 'D:/nativeApp/src/components/Home';
 import {NavigationContainer} from '@react-navigation/native';
 import Login from '../../components/Login';
@@ -41,15 +43,19 @@ function SplashScreen({navigation}) {
         style={{width: 100, height: 100}}
         source={require('../../assets/images/hamburger.png')}
       />
-      <Text style={styles.logoText}>Lumeal</Text>
+      <Text style={styles.logoText}>LuMeal</Text>
     </View>
   );
 }
 export default function AppNavigation() {
+  const Token = useSelector(state => {
+    return state.AddToken.token;
+  });
+
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="splash"
+        initialRouteName={Token ? 'dashBoard' : 'splash'}
         screenOptions={{
           headerShown: false,
         }}>

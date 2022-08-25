@@ -14,69 +14,53 @@ function Card({
   helperText = 'Helper Text Not Available',
   disabled = false,
 }) {
-  let colorDarkGrey = colors.darkGrey;
+  let colorLightGrey = colors.royalBlue;
   let colorBlack = colors.black;
   const styles = getStyles();
   {
     disabled
       ? ((color = colors.lightGrey),
-        (colorDarkGrey = colors.disabledGrey),
+        (colorLightGrey = colors.disabledGrey),
         (colorBlack = colors.disabledGrey))
       : color;
   }
   return (
-    <View style={[styles.container, {elevation: disabled ? 0 : 10}]}>
-      <View
-        style={{
-          backgroundColor: 'white',
-          height: '100%',
-          width: '30%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          elevation: 10,
-        }}>
+    <View style={styles.cardContainer}>
+      <View>
         <FontAwesome5 name={img} size={50} color={color} />
       </View>
       <View
         style={{
-          width: '55%',
-          justifyContent: 'center',
           alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: 10,
         }}>
         <Text
           style={{
-            color: colorBlack,
-            fontSize: 15,
-            width: '60%',
+            textAlign: 'center',
             fontWeight: '700',
-            textAlign: 'left',
+            fontSize: 20,
+            color: colorBlack,
           }}>
           {Title}
         </Text>
-        <Text
-          numberOfLines={6}
-          style={{
-            textAlign: 'left',
-            width: '60%',
-            color: colorBlack,
-            fontSize: 15,
-            flexWrap: 'wrap',
-          }}>
+        <Text style={{textAlign: 'center', color: colorBlack}}>
           {helperText}
         </Text>
       </View>
-      <TouchableOpacity
-        onPress={onPress}
-        style={{width: '15%'}}
-        disabled={disabled}>
+      <TouchableOpacity onPress={onPress} disabled={disabled}>
         <View
           style={{
-            backgroundColor: colorDarkGrey,
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
+            backgroundColor: colorLightGrey,
+            borderRadius: 10,
+            marginTop: 20,
+            padding: 7,
           }}>
-          <Entypo name="chevron-thin-right" size={30} color={color} />
+          <Entypo
+            name="chevron-thin-right"
+            size={27}
+            color={colors.lightGrey}
+          />
         </View>
       </TouchableOpacity>
     </View>
