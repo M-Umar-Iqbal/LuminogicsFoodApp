@@ -58,68 +58,12 @@ function Card({
           }}>
           <Entypo
             name="chevron-thin-right"
-            size={25}
+            size={27}
             color={colors.lightGrey}
           />
         </View>
       </TouchableOpacity>
     </View>
-
-    // <View style={[styles.container, {elevation: disabled ? 0 : 10}]}>
-    //   <View
-    //     style={{
-    //       backgroundColor: 'white',
-    //       height: '100%',
-    //       width: '30%',
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //       elevation: 10,
-    //     }}>
-    //     <FontAwesome5 name={img} size={50} color={color} />
-    //   </View>
-    //   <View
-    //     style={{
-    //       width: '55%',
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //     }}>
-    //     <Text
-    //       style={{
-    //         color: colorBlack,
-    //         fontSize: 15,
-    //         width: '60%',
-    //         fontWeight: '700',
-    //         textAlign: 'left',
-    //       }}>
-    //       {Title}
-    //     </Text>
-    //     <Text
-    //       numberOfLines={6}
-    //       style={{
-    //         textAlign: 'left',
-    //         width: '60%',
-    //         color: colorBlack,
-    //         fontSize: 15,
-    //         flexWrap: 'wrap',
-    //       }}>
-    //       {helperText}
-    //     </Text>
-    //   </View>
-    //   <TouchableOpacity
-    //     onPress={onPress}
-    //     style={{width: '15%'}}
-    //     disabled={disabled}>
-    //     <View
-    //       style={{
-    //         backgroundColor: colorDarkGrey,
-    //         justifyContent: 'center',
-    //         alignItems: 'center',
-    //         height: '100%',
-    //       }}>
-    //       <Entypo name="chevron-thin-right" size={30} color={color} />
-    //     </View>
-    //   </TouchableOpacity>
-    // </View>
   );
 }
 export default Card;

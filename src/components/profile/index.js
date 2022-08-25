@@ -36,7 +36,6 @@ export default function Profile({navigation}) {
 
     setImageUrl(image);
   }
-
   useBackHandler(confirmExit);
 
   return (
