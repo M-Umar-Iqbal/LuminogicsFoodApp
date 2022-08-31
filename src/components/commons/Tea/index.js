@@ -7,7 +7,10 @@ import LoadingIndicator from '../loadingIndicator';
 import URL from '../../../constants/constants';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Skeleton from '../../commons/skeleton';
+
 const today = new Date();
+
 const TeaGenerateReport = ({navigation, API, title}) => {
   const [totalCup, setTotalCup] = useState(0);
   const [halfCup, setHalfCup] = useState(0);
@@ -79,7 +82,8 @@ const TeaGenerateReport = ({navigation, API, title}) => {
         {Data.length !== 0 ? (
           <FlatDataList Data={Data} />
         ) : (
-          <LoadingIndicator title={checkData === null ? true : false} />
+          // <LoadingIndicator title={checkData === null ? true : false} />
+          <Skeleton />
         )}
       </View>
     </View>

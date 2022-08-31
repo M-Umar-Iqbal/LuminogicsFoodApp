@@ -84,13 +84,15 @@ export default function Home({navigation}) {
     if (passwordValidation && emailValidation) {
       setLoader(true);
       axios
-
         .post(`${URL}/api/users/log-in`, admin)
         .then(function (response) {
-          const Token = response?.data?.payload?.data?.token;
-          const userName = response?.data?.payload?.data?.user?.userName;
-          const Email = response?.data?.payload?.data?.user?.email;
-          const Image = response?.data?.payload?.data?.user?.employeeImage;
+          const payload = response?.data?.payload?.data;
+          const Token = payload?.token;
+          const userName = payload?.user?.userName;
+          const Email = payload?.user?.email;
+          const Image = payload?.user?.employeeImage;
+          const events = payload?.events;
+          console.log(events);
 
           storeData(Token, userName, Email, Image);
           ToastAndroid.show(response.data.metadata.message, ToastAndroid.SHORT);

@@ -4,12 +4,14 @@ import {colors} from '../../constants/constants';
 const getStyles = () =>
   StyleSheet.create({
     mainContainer: {
-      marginTop: 20,
-
+      marginTop: 10,
+      marginBottom: 20,
+      marginLeft: 16,
+      marginRight: 16,
+      justifyContent: 'space-between',
+      flex: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
-      width: '100%',
-      justifyContent: 'space-between',
     },
   });
 export default getStyles;

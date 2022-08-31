@@ -15,6 +15,7 @@ import URL, {colors} from '../../constants/constants';
 import axios from 'axios';
 import LoadingIndicator from '../commons/loadingIndicator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LunchSkeleton from '../../components/commons/skeleton/lunchskeleton';
 const today = new Date();
 
 export default function Lunch({navigation: {goBack}}) {
@@ -96,7 +97,8 @@ export default function Lunch({navigation: {goBack}}) {
         </View>
       ) : (
         <View flex={8}>
-          <LoadingIndicator title={checkData === null ? true : false} />
+          {/* <LoadingIndicator title={checkData === null ? true : false} /> */}
+          <LunchSkeleton />
         </View>
       )}
     </View>

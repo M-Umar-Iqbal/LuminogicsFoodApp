@@ -7,7 +7,6 @@ import {
   ScrollView,
   RefreshControl,
   TouchableOpacity,
-  ToastAndroid,
 } from 'react-native';
 import {Avatar} from 'react-native-paper';
 import Card from '../commons/itemCards';
@@ -16,7 +15,6 @@ import {useBackHandler} from '@react-native-community/hooks';
 import MaterialIcons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
-
 import {
   colors,
   morningTeaStart,
@@ -82,7 +80,7 @@ export default function Dashboard({navigation}) {
     <>
       <View
         style={{
-          height: 60,
+          height: 65,
           flexDirection: 'row',
           backgroundColor: 'white',
         }}>
@@ -139,50 +137,43 @@ export default function Dashboard({navigation}) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{backgroundColor: colors.main, flex: 1}}>
-        <ScrollView
-          style={{
-            marginLeft: 16,
-            marginRight: 16,
-          }}
-          contentContainerStyle={styles.scrollView}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }>
-          <CheckInternet />
-          <View style={styles.mainContainer} flex={1}>
-            <Card
-              Title="Morning Tea"
-              img="coffee"
-              color="#9ED2C6"
-              onPress={() => navigation.navigate('MorningTea')}
-              helperText="The report can be generated after 11:00 AM"
-              disabled={
-                checkTime(morningTeaStart, morningTeaEnd) ? false : true
-              }
-            />
-            <Card
-              Title="Lunch"
-              img="hamburger"
-              color="#D36B00"
-              onPress={() => navigation.navigate('Lunch')}
-              helperText="The report can be generated after 01:00 PM"
-              disabled={checkTime(lunchStart, lunchEnd) ? false : true}
-            />
 
-            <Card
-              Title="Evening Tea"
-              img="coffee"
-              color="#FEC260"
-              onPress={() => navigation.navigate('EveningTea')}
-              helperText="The report can be generated after 05:00 PM"
-              disabled={
-                checkTime(eveningTeaStart, eveningTeaEnd) ? false : true
-              }
-            />
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView
+        backgroundColor={colors.main}
+        flex={1}
+        paddingTop={10}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
+        <CheckInternet />
+        <View style={styles.mainContainer} flex={1}>
+          <Card
+            Title="Morning Tea"
+            img="coffee"
+            color="#9ED2C6"
+            onPress={() => navigation.navigate('MorningTea')}
+            helperText="The report can be generated after 11:00 AM"
+            disabled={checkTime(morningTeaStart, morningTeaEnd) ? false : true}
+          />
+          <Card
+            Title="Lunch"
+            img="hamburger"
+            color="#D36B00"
+            onPress={() => navigation.navigate('Lunch')}
+            helperText="The report can be generated after 01:00 PM"
+            disabled={checkTime(lunchStart, lunchEnd) ? false : true}
+          />
+
+          <Card
+            Title="Evening Tea"
+            img="coffee"
+            color="#FEC260"
+            onPress={() => navigation.navigate('EveningTea')}
+            helperText="The report can be generated after 04:00 PM"
+            disabled={checkTime(eveningTeaStart, eveningTeaEnd) ? false : true}
+          />
+        </View>
+      </ScrollView>
     </>
   );
 }
