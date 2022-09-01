@@ -41,15 +41,16 @@ export default function Profile({navigation}) {
   return (
     <View flex={1} style={{backgroundColor: colors.white}}>
       <View
-        flex={5}
         style={{
-          //   backgroundColor: 'red',
-          justifyContent: 'center',
+          flex: 1,
+          // backgroundColor: 'red',
+          paddingTop: 30,
+          justifyContent: 'flex-start',
           alignItems: 'center',
         }}>
         {imageUrl ? (
           <Image
-            style={{height: 230, width: 230, borderRadius: 230 / 2}}
+            style={{height: 260, width: 230, borderRadius: 50}}
             source={{
               uri: imageUrl,
             }}
@@ -75,22 +76,6 @@ export default function Profile({navigation}) {
             {email}
           </Text>
         </View>
-      </View>
-      <View flex={5} style={{alignItems: 'center'}}>
-        {/* <TouchableOpacity
-          style={styles.customButtonContainer}
-          onPress={() => {
-            setLoader(true);
-            dispatch(AddToken('null'));
-            storeData('token');
-            navigation.navigate('login');
-          }}>
-          {!loader ? (
-            <Text style={styles.customButtonTitle}>Logout</Text>
-          ) : (
-            <ActivityIndicator size={20} color="#ffffff" />
-          )}
-        </TouchableOpacity> */}
       </View>
     </View>
   );

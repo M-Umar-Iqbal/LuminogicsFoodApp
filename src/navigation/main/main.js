@@ -118,7 +118,7 @@ export default function AppNavigation() {
           }}
         />
         <Stack.Screen
-          name="EveningTea"
+          name="Evening-Tea"
           component={EveningTea}
           options={{
             headerStyle: {
@@ -135,7 +135,7 @@ export default function AppNavigation() {
           }}
         />
         <Stack.Screen
-          name="MorningTea"
+          name="Morning-Tea"
           component={MorningTea}
           options={{
             headerStyle: {

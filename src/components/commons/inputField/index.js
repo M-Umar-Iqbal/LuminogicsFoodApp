@@ -55,7 +55,8 @@ const InputField = ({
             name={isPasswordSecure ? 'eye-off' : 'eye'}
             size={iconSize}
             solid
-            color={colors.darkGrey}
+            // color={colors.darkGrey}
+            color="rgba(0,0,0,0.5)"
             onPress={() => {
               isPasswordSecure
                 ? setIsPasswordSecure(false)

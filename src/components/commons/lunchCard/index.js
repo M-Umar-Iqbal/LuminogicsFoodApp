@@ -47,7 +47,7 @@ export default function LunchCard({
               {
                 textTransform: 'capitalize',
                 color: colors.lightGrey,
-                fontSize: 19,
+                fontSize: 22,
               },
             ]}>
             {Name}
@@ -88,9 +88,9 @@ export default function LunchCard({
               borderTopColor: 'white',
               color: 'black',
               marginTop: 10,
-              paddingTop: 7,
-              fontSize: 15,
-              fontWeight: '700',
+              paddingTop: 8,
+              fontSize: 17,
+              fontWeight: '500',
               lineHeight: 20,
             }}>
             Description

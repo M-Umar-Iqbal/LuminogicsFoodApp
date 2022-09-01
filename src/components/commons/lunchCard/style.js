@@ -12,6 +12,7 @@ const getStyles = () =>
       color: colors.black,
       fontSize: 16,
       paddingBottom: 10,
+      textTransform: 'capitalize',
     },
     container: {
       marginTop: 15,

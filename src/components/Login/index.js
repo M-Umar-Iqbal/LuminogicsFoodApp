@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from 'react-native';
+import {AddEvents} from '../../redux/actions/action';
 import {TextInput} from 'react-native-paper';
 import React, {useEffect, useState} from 'react';
 import {colors} from '../../constants/constants';
@@ -18,8 +19,11 @@ import {Button} from 'react-native-paper';
 import InputField from '../commons/inputField';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
 
 export default function Home({navigation}) {
+  const dispatch = useDispatch();
+
   const styles = getStyles();
   const [emailErrorColor, setEmailErrorColor] = useState(colors.main);
   const [passwordErrorColor, setPasswordErrorColor] = useState(colors.main);
@@ -54,10 +58,10 @@ export default function Home({navigation}) {
       return true;
     } else if (email.trim() === '') {
       setEmailErrorColor('red');
-      setEmailError('This field is required');
+      setEmailError('The Email Field Is Required');
     } else {
       setEmailErrorColor('red');
-      setEmailError('Invalid Email');
+      setEmailError('Email is Invalid');
       return false;
     }
   }
@@ -65,7 +69,7 @@ export default function Home({navigation}) {
   function passwordCheck() {
     if (password === '') {
       setPasswordErrorColor('red');
-      setPasswordError('This field is required');
+      setPasswordError('The Password Field Is Required');
       return false;
     } else if (password.trim() === '') {
       setPasswordErrorColor('red');
@@ -84,22 +88,29 @@ export default function Home({navigation}) {
     if (passwordValidation && emailValidation) {
       setLoader(true);
       axios
-
         .post(`${URL}/api/users/log-in`, admin)
         .then(function (response) {
-          const Token = response?.data?.payload?.data?.token;
-          const userName = response?.data?.payload?.data?.user?.userName;
-          const Email = response?.data?.payload?.data?.user?.email;
-          const Image = response?.data?.payload?.data?.user?.employeeImage;
+          const payload = response?.data?.payload?.data;
+          const Token = payload?.token;
+          const userName = payload?.user?.userName;
+          const Email = payload?.user?.email;
+          const Image = payload?.user?.employeeImage;
+          const availableEvents = payload?.events;
+          try {
+            dispatch(AddEvents(availableEvents));
+          } catch (e) {
+            console.log(e);
+          }
 
           storeData(Token, userName, Email, Image);
           ToastAndroid.show(response.data.metadata.message, ToastAndroid.SHORT);
+
           setTimeout(() => {
             response?.data?.metadata?.responseCode === 200
               ? navigation.navigate('dashBoard')
               : ToastAndroid.show('Error Occurred', ToastAndroid.SHORT);
             setLoader(false);
-          }, 500);
+          }, 1000);
         })
         .catch(function (error) {
           setLoader(false);
@@ -134,13 +145,13 @@ export default function Home({navigation}) {
         <View style={styles.mainInputFieldsContainer}>
           <View style={styles.inputContainer}>
             <View style={styles.gap}>
-              <Text style={styles.loginText}>Sign in</Text>
+              <Text style={styles.loginText}>Sign In</Text>
             </View>
             <InputField
               placeholder="Email"
               color={emailErrorColor}
               icon="mail-outline"
-              iconSize={25}
+              iconSize={32}
               setText={setEmail}
               keyboardType="email"
               rightIcon={'close'}
@@ -152,7 +163,7 @@ export default function Home({navigation}) {
               placeholder="Password"
               color={passwordErrorColor}
               icon="lock-outline"
-              iconSize={25}
+              iconSize={32}
               Type="password"
               setText={setPassword}
               secure={true}
@@ -169,8 +180,8 @@ export default function Home({navigation}) {
               buttonColor={colors.main}
               onPress={checkValidation}
               loading={loader}
-              contentStyle={{height: 60}}>
-              Sign in
+              contentStyle={{height: 65}}>
+              Sign In
             </Button>
           </View>
         </View>
