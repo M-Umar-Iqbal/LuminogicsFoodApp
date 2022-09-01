@@ -8,6 +8,7 @@ import {
   RefreshControl,
   TouchableOpacity,
 } from 'react-native';
+
 import {Avatar} from 'react-native-paper';
 import Card from '../commons/itemCards';
 import getStyles from './style';
@@ -24,14 +25,44 @@ import {
   lunchStart,
   lunchEnd,
 } from '../../constants/constants';
+import {useSelector} from 'react-redux';
 import CheckInternet from '../../components/commons/checkInternet/index.js';
 import {AddToken} from '../../redux/actions/action';
+import {AddEvents} from '../../redux/actions/action';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
 export default function Dashboard({navigation}) {
+  const Time12Hr = [
+    '12:00 AM',
+    '01:00 AM',
+    '02:00 AM',
+    '03:00 AM',
+    '04:00 AM',
+    '05:00 AM',
+    '06:00 AM',
+    '07:00 AM',
+    '08:00 AM',
+    '09:00 AM',
+    '10:00 AM',
+    '11:00 AM',
+    '12:00 PM',
+    '01:00 PM',
+    '02:00 PM',
+    '03:00 PM',
+    '04:00 PM',
+    '05:00 PM',
+    '06:00 PM',
+    '07:00 PM',
+    '08:00 PM',
+    '09:00 PM',
+    '10:00 PM',
+    '11:00 PM',
+  ];
+  const data = useSelector(state => state.Events.eventData);
+
   const dispatch = useDispatch();
 
   const [token, setToken] = useState();
@@ -93,7 +124,7 @@ export default function Dashboard({navigation}) {
           }}>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <Avatar.Image
-              size={35}
+              size={40}
               backgroundColor={colors.royalBlue}
               source={require('../../assets/images/avatar.png')}
             />
@@ -126,12 +157,12 @@ export default function Dashboard({navigation}) {
               dispatch(AddToken('null'));
               storeData('token');
               storeData('userImage');
-
               navigation.navigate('login');
+              // dispatch(AddEvents(null));
             }}>
             <MaterialIcons
               name={'log-out-outline'}
-              size={35}
+              size={40}
               color={colors.royalBlue}
             />
           </TouchableOpacity>
@@ -147,7 +178,37 @@ export default function Dashboard({navigation}) {
         }>
         <CheckInternet />
         <View style={styles.mainContainer} flex={1}>
-          <Card
+          {data !== null &&
+            data.map(e => (
+              <Card
+                key={e._id}
+                Title={e.eventName.replace('-', ' ')}
+                img={
+                  e.eventName === 'Morning-Tea' || e.eventName === 'Evening-Tea'
+                    ? 'coffee'
+                    : 'hamburger'
+                }
+                color={
+                  e.eventName === 'Morning-Tea'
+                    ? '#9ED2C6'
+                    : e.eventName === 'Evening-Tea'
+                    ? '#FEC260'
+                    : e.eventName === 'Lunch'
+                    ? '#D36B00'
+                    : '#f0f0f0'
+                }
+                onPress={() => navigation.navigate(e.eventName)}
+                helperText={`The report can be generated after ${
+                  Time12Hr[e.eventEndTime]
+                }`}
+                disabled={
+                  checkTime(e.eventEndTime * 60 + 0, morningTeaEnd)
+                    ? false
+                    : true
+                }
+              />
+            ))}
+          {/* <Card
             Title="Morning Tea"
             img="coffee"
             color="#9ED2C6"
@@ -171,7 +232,7 @@ export default function Dashboard({navigation}) {
             onPress={() => navigation.navigate('EveningTea')}
             helperText="The report can be generated after 04:00 PM"
             disabled={checkTime(eveningTeaStart, eveningTeaEnd) ? false : true}
-          />
+          /> */}
         </View>
       </ScrollView>
     </>

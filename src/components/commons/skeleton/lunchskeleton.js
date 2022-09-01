@@ -4,11 +4,12 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 // create a component
-const Skeleton = () => {
-  const array = [1, 2, 3];
-  return (
+const Skeleton = ({data}) => {
+  const totalItems = [1, 2, 3, 4, 5];
+
+  return !data ? (
     <ScrollView>
-      {array.map((e, i) => (
+      {totalItems.map((e, i) => (
         <View
           key={i}
           style={{
@@ -83,6 +84,17 @@ const Skeleton = () => {
         </View>
       ))}
     </ScrollView>
+  ) : (
+    <View
+      flex={1}
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text style={{color: 'black', fontWeight: '700'}}>
+        No Orders Placed Yet
+      </Text>
+    </View>
   );
 };
 

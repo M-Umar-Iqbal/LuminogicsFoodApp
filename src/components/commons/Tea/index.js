@@ -50,7 +50,6 @@ const TeaGenerateReport = ({navigation, API, title}) => {
       res?.data?.metadata?.message === 'No Record Found'
     ) {
       setCheckData(null);
-      res?.data?.metadata?.status;
     } else {
       setTotalCup(res?.data?.payload?.data?.TotalCups);
       setData(res?.data?.payload?.data?.orders);
@@ -83,7 +82,7 @@ const TeaGenerateReport = ({navigation, API, title}) => {
           <FlatDataList Data={Data} />
         ) : (
           // <LoadingIndicator title={checkData === null ? true : false} />
-          <Skeleton />
+          <Skeleton data={checkData === null ? true : false} />
         )}
       </View>
     </View>

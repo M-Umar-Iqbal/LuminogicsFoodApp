@@ -98,7 +98,7 @@ export default function Lunch({navigation: {goBack}}) {
       ) : (
         <View flex={8}>
           {/* <LoadingIndicator title={checkData === null ? true : false} /> */}
-          <LunchSkeleton />
+          <LunchSkeleton data={checkData === null ? true : false} />
         </View>
       )}
     </View>

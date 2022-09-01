@@ -35,24 +35,25 @@ const styles = () =>
       marginBottom: 10,
       color: colors.main,
       fontSize: 30,
-      fontWeight: '800',
-      // fontFamily: 'Helvetica',
+      fontWeight: '700',
     },
 
     customButtonContainer: {
-      marginTop: 5,
+      marginTop: 2,
       elevation: 5,
-      borderRadius: 12,
+      borderColor: colors.babyBlue,
+      borderWidth: 4,
+      borderRadius: 10,
     },
-
     gap: {
-      marginTop: 7,
-      marginBottom: 7,
+      marginTop: 8,
+      marginBottom: 8,
     },
     error: {
+      marginLeft: 5,
       color: 'red',
-      fontSize: 13,
-      fontWeight: '500',
+      fontSize: 14,
+      fontWeight: '600',
     },
   });
 export default styles;

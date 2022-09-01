@@ -116,7 +116,7 @@ export default function AuthNavigation() {
           }}
         />
         <AuthStack.Screen
-          name="EveningTea"
+          name="Evening-Tea"
           component={EveningTea}
           options={{
             headerStyle: {
@@ -134,7 +134,7 @@ export default function AuthNavigation() {
           }}
         />
         <AuthStack.Screen
-          name="MorningTea"
+          name="Morning-Tea"
           component={MorningTea}
           options={{
             headerStyle: {
